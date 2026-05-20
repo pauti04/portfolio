@@ -46,7 +46,7 @@ export default function CodeBlock({
       <pre className="px-4 py-3 mono text-[0.78rem] leading-[1.7] overflow-x-auto text-[var(--color-fg-soft)]">
         {lines.map((line, i) => (
           <div key={i} className="flex">
-            <span className="text-[var(--color-muted)]/50 tabular-nums select-none pr-4 text-right w-7 shrink-0">
+            <span className="text-[var(--color-muted)] tabular-nums select-none pr-4 text-right w-7 shrink-0">
               {i + 1}
             </span>
             <span className="whitespace-pre">
