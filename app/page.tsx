@@ -256,7 +256,7 @@ function Work() {
         ris-live right now. nothing here is a screenshot — poke at it.
       </p>
 
-      <ol className="space-y-24">
+      <div className="space-y-24">
         {projects.map((p) => {
           const Demo = DEMOS[p.artifact];
           return (
@@ -374,7 +374,7 @@ function Work() {
             </article>
           );
         })}
-      </ol>
+      </div>
     </section>
   );
 }
@@ -531,7 +531,8 @@ function Footer() {
           </Link>{" "}
           <a
             href="/feed.xml"
-            className="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition"
+            aria-label="RSS feed"
+            className="inline-block px-2 py-1 -mx-1 text-[var(--color-muted)] hover:text-[var(--color-accent)] transition"
           >
             (rss)
           </a>

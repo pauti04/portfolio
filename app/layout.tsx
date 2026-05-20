@@ -1,4 +1,6 @@
 import type { Metadata, Viewport } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const SITE_URL = "https://pauti04.dev";
@@ -77,7 +79,11 @@ export default function RootLayout({
         />
         <link rel="alternate" type="application/rss+xml" title="Parth — Writing" href="/feed.xml" />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <SpeedInsights />
+        <Analytics />
+      </body>
     </html>
   );
 }
