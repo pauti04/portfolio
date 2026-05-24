@@ -15,7 +15,6 @@ import CodeBlock, {
 } from "./components/CodeBlock";
 import LazyDemo from "./components/LazyDemo";
 import GitHubStats from "./components/GitHubStats";
-import RecentCommits from "./components/RecentCommits";
 import MarginNote from "./components/MarginNote";
 
 const DEMOS: Record<string, React.ComponentType> = {
@@ -72,7 +71,6 @@ export default function Home() {
         <Hero />
         <Highlights />
         <GitHubStats />
-        <RecentCommits />
         <Work />
         {experience.length > 0 && <ExperienceSection />}
         <About />
@@ -116,12 +114,6 @@ function TopBar() {
             className="text-[0.86rem] text-[var(--color-fg-soft)] hover:text-[var(--color-fg)] px-3 py-1.5 rounded-md hover:bg-white/5 transition hidden sm:inline"
           >
             CV
-          </Link>
-          <Link
-            href="/uses"
-            className="text-[0.86rem] text-[var(--color-fg-soft)] hover:text-[var(--color-fg)] px-3 py-1.5 rounded-md hover:bg-white/5 transition hidden md:inline"
-          >
-            Uses
           </Link>
           <a
             href={`mailto:${social.email}`}
@@ -412,7 +404,7 @@ function ExperienceSection() {
 
   return (
     <section id="experience" className="pt-20 pb-12 border-t border-[var(--color-line)]">
-      <SectionLabel n="01b" title="where I've worked" />
+      <SectionLabel n="02" title="where I've worked" />
       <ol className="mt-10 space-y-12">
         {experience.map((x) => (
           <li key={x.company + x.role + x.start}>
@@ -460,7 +452,7 @@ function ExperienceSection() {
 function About() {
   return (
     <section id="about" className="pt-20 pb-12 border-t border-[var(--color-line)]">
-      <SectionLabel n="02" title="about me" />
+      <SectionLabel n="03" title="about me" />
       <div className="grid md:grid-cols-[1fr_260px] gap-x-10 gap-y-8 mt-8">
         <div className="space-y-5 text-[1.02rem] leading-[1.78] text-[var(--color-fg-soft)] max-w-[58ch]">
           <p>
@@ -543,7 +535,7 @@ function Contact() {
       id="contact"
       className="my-20 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-soft)]/60 p-9 md:p-12"
     >
-      <SectionLabel n="03" title="say hi" />
+      <SectionLabel n="04" title="say hi" />
       <h2 className="serif text-[2.1rem] md:text-[2.8rem] leading-[1.05] tracking-[-0.022em] text-[var(--color-fg)] font-semibold mt-7 max-w-[22ch] lowercase">
         building something where systems and ML meet?{" "}
         <span className="text-[var(--color-accent)]">let&apos;s talk.</span>
@@ -561,9 +553,6 @@ function Contact() {
         <Link href="/cv" target="_blank" className="btn btn-ghost">
           CV ↗
         </Link>
-        <a href="/contact.vcf" download className="btn btn-ghost">
-          save contact (.vcf)
-        </a>
         <a
           href={social.github}
           target="_blank"
@@ -616,16 +605,6 @@ function Footer() {
             className="inline-block px-2 py-1 -mx-1 text-[var(--color-muted)] hover:text-[var(--color-accent)] transition"
           >
             (rss)
-          </a>
-          <br />
-          <Link href="/now" className="link">
-            /now →
-          </Link>{" "}
-          <Link href="/uses" className="link ml-2">
-            /uses →
-          </Link>{" "}
-          <a href="/contact.vcf" download className="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition">
-            (vcard)
           </a>
         </p>
       </div>

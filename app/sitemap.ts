@@ -9,8 +9,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: `${BASE}/`, lastModified: now, priority: 1.0 },
     { url: `${BASE}/cv`, lastModified: now, priority: 0.7 },
-    { url: `${BASE}/uses`, lastModified: now, priority: 0.6 },
-    { url: `${BASE}/now`, lastModified: now, priority: 0.6 },
     { url: `${BASE}/writing`, lastModified: now, priority: 0.8 },
     ...POSTS.map((p) => ({
       url: `${BASE}${p.href}`,
