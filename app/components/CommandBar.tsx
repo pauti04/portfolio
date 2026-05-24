@@ -108,6 +108,14 @@ export default function CommandBar() {
         exec: () => (window.location.href = "/uses"),
       },
       {
+        id: "a-now",
+        kind: "external",
+        title: "/now",
+        subtitle: "What I'm working on this week",
+        group: "Actions",
+        exec: () => (window.location.href = "/now"),
+      },
+      {
         id: "a-github",
         kind: "external",
         title: "GitHub profile",

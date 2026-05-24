@@ -548,7 +548,10 @@ function Footer() {
             (rss)
           </a>
           <br />
-          <Link href="/uses" className="link">
+          <Link href="/now" className="link">
+            /now →
+          </Link>{" "}
+          <Link href="/uses" className="link ml-2">
             /uses →
           </Link>{" "}
           <a href="/contact.vcf" download className="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition">

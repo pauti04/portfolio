@@ -80,6 +80,12 @@ export default function RootLayout({
         <link rel="alternate" type="application/rss+xml" title="Parth — Writing" href="/feed.xml" />
       </head>
       <body>
+        <a
+          href="#cover"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[100] focus:bg-[var(--color-accent)] focus:text-[var(--color-bg)] focus:px-3 focus:py-1.5 focus:rounded-md focus:font-medium focus:text-[0.88rem]"
+        >
+          Skip to content
+        </a>
         {children}
         <SpeedInsights />
         <Analytics />
