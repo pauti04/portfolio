@@ -14,6 +14,7 @@ import CodeBlock, {
 } from "./components/CodeBlock";
 import LazyDemo from "./components/LazyDemo";
 import GitHubStats from "./components/GitHubStats";
+import RecentCommits from "./components/RecentCommits";
 import MarginNote from "./components/MarginNote";
 
 const DEMOS: Record<string, React.ComponentType> = {
@@ -70,6 +71,7 @@ export default function Home() {
         <Hero />
         <Highlights />
         <GitHubStats />
+        <RecentCommits />
         <Work />
         <About />
         <Contact />
@@ -112,6 +114,12 @@ function TopBar() {
             className="text-[0.86rem] text-[var(--color-fg-soft)] hover:text-[var(--color-fg)] px-3 py-1.5 rounded-md hover:bg-white/5 transition hidden sm:inline"
           >
             CV
+          </Link>
+          <Link
+            href="/uses"
+            className="text-[0.86rem] text-[var(--color-fg-soft)] hover:text-[var(--color-fg)] px-3 py-1.5 rounded-md hover:bg-white/5 transition hidden md:inline"
+          >
+            Uses
           </Link>
           <a
             href={`mailto:${social.email}`}
@@ -483,6 +491,9 @@ function Contact() {
         <Link href="/cv" target="_blank" className="btn btn-ghost">
           CV ↗
         </Link>
+        <a href="/contact.vcf" download className="btn btn-ghost">
+          save contact (.vcf)
+        </a>
         <a
           href={social.github}
           target="_blank"
@@ -535,6 +546,13 @@ function Footer() {
             className="inline-block px-2 py-1 -mx-1 text-[var(--color-muted)] hover:text-[var(--color-accent)] transition"
           >
             (rss)
+          </a>
+          <br />
+          <Link href="/uses" className="link">
+            /uses →
+          </Link>{" "}
+          <a href="/contact.vcf" download className="text-[var(--color-muted)] hover:text-[var(--color-accent)] transition">
+            (vcard)
           </a>
         </p>
       </div>

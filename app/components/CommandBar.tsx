@@ -92,6 +92,22 @@ export default function CommandBar() {
         exec: () => window.open("/cv", "_blank", "noreferrer"),
       },
       {
+        id: "a-vcard",
+        kind: "action",
+        title: "Save contact (.vcf)",
+        subtitle: "Download my vCard",
+        group: "Actions",
+        exec: () => (window.location.href = "/contact.vcf"),
+      },
+      {
+        id: "a-uses",
+        kind: "external",
+        title: "/uses",
+        subtitle: "Tools, editor, fonts, hosting",
+        group: "Actions",
+        exec: () => (window.location.href = "/uses"),
+      },
+      {
         id: "a-github",
         kind: "external",
         title: "GitHub profile",
