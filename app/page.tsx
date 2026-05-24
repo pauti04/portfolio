@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { projects, numbers, skills, social } from "@/lib/data";
 import { POSTS } from "@/lib/writing";
+import { education, experience } from "@/lib/resume";
 import BourseDemo from "./components/BourseDemo";
 import NetPulseDemo from "./components/NetPulseDemo";
 import ChainCheckDemo from "./components/ChainCheckDemo";
@@ -73,6 +74,7 @@ export default function Home() {
         <GitHubStats />
         <RecentCommits />
         <Work />
+        {experience.length > 0 && <ExperienceSection />}
         <About />
         <Contact />
         <Footer />
@@ -151,10 +153,20 @@ function Hero() {
       </h1>
 
       <p className="text-[1.02rem] md:text-[1.12rem] leading-[1.65] text-[var(--color-fg-soft)] mt-7 max-w-[58ch] fade-in d-2">
-        CS undergrad. mostly write Rust and Python; some TypeScript I usually
-        regret later. spend my weekends on a low-latency matching engine, a BGP
-        hijack detector that finally caught a real one last month, and a GNN
-        that thinks it understands my AWS bill.
+        {education[0] ? (
+          <>
+            {education[0].degree.match(/^B\.?S\.?/i) ? "CS undergrad" : "Student"}{" "}
+            at{" "}
+            <span className="text-[var(--color-fg)]">{education[0].school}</span>
+            .{" "}
+          </>
+        ) : (
+          <>CS undergrad. </>
+        )}
+        mostly write Rust and Python; some TypeScript I usually regret later.
+        spend my weekends on a low-latency matching engine, a BGP hijack
+        detector that finally caught a real one last month, and a GNN that
+        thinks it understands my AWS bill.
       </p>
 
       <p className="text-[0.92rem] text-[var(--color-muted)] mt-4 fade-in d-2 leading-relaxed">
@@ -383,6 +395,64 @@ function Work() {
           );
         })}
       </div>
+    </section>
+  );
+}
+
+function ExperienceSection() {
+  const fmtMonth = (s: string) => {
+    if (!s) return s;
+    if (s === "Present" || s.startsWith("Expected")) return s;
+    const [y, m] = s.split("-");
+    if (!y || !m) return s;
+    const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const i = parseInt(m, 10) - 1;
+    return months[i] ? `${months[i]} ${y}` : s;
+  };
+
+  return (
+    <section id="experience" className="pt-20 pb-12 border-t border-[var(--color-line)]">
+      <SectionLabel n="01b" title="where I've worked" />
+      <ol className="mt-10 space-y-12">
+        {experience.map((x) => (
+          <li key={x.company + x.role + x.start}>
+            <header className="flex items-baseline justify-between gap-4 flex-wrap">
+              <div className="flex items-baseline gap-3 flex-wrap">
+                <h3 className="serif text-[1.4rem] md:text-[1.6rem] leading-[1.1] tracking-[-0.018em] text-[var(--color-fg)] font-semibold">
+                  {x.href ? (
+                    <a
+                      href={x.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="hover:text-[var(--color-accent)] transition"
+                    >
+                      {x.company}
+                    </a>
+                  ) : (
+                    x.company
+                  )}
+                </h3>
+                <span className="text-[0.92rem] text-[var(--color-fg-soft)]">
+                  · {x.role}
+                </span>
+              </div>
+              <span className="text-[0.84rem] text-[var(--color-muted)] tabular-nums font-mono shrink-0">
+                {fmtMonth(x.start)} – {fmtMonth(x.end)}
+              </span>
+            </header>
+            {x.location && (
+              <p className="text-[0.86rem] text-[var(--color-muted)] mt-0.5">
+                {x.location}
+              </p>
+            )}
+            <ul className="mt-4 space-y-1.5 ml-5 list-disc list-outside text-[0.96rem] leading-[1.7] text-[var(--color-fg-soft)] marker:text-[var(--color-muted)]">
+              {x.bullets.map((b, i) => (
+                <li key={i}>{b}</li>
+              ))}
+            </ul>
+          </li>
+        ))}
+      </ol>
     </section>
   );
 }

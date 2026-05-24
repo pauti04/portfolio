@@ -1,11 +1,23 @@
 import type { Metadata } from "next";
 import { projects, skills, social } from "@/lib/data";
+import { education, experience, awards, extras } from "@/lib/resume";
 import PrintButton from "./PrintButton";
 
 export const metadata: Metadata = {
   title: "Parth — CV",
   description: "Curriculum vitae",
 };
+
+function fmtMonth(s: string) {
+  if (!s) return s;
+  if (s.startsWith("Expected")) return s;
+  if (s === "Present") return "Present";
+  const [y, m] = s.split("-");
+  if (!y || !m) return s;
+  const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  const i = parseInt(m, 10) - 1;
+  return months[i] ? `${months[i]} ${y}` : s;
+}
 
 export default function CVPage() {
   return (
@@ -32,6 +44,15 @@ export default function CVPage() {
                 github.com/pauti04
               </a>
             </div>
+            {extras.linkedin && (
+              <div>
+                <a href={`https://${extras.linkedin.replace(/^https?:\/\//, "")}`} className="underline decoration-[#999]">
+                  {extras.linkedin}
+                </a>
+              </div>
+            )}
+            {extras.location && <div>{extras.location}</div>}
+            {extras.phone && <div>{extras.phone}</div>}
           </div>
         </header>
 
@@ -46,6 +67,85 @@ export default function CVPage() {
             and ML-infrastructure roles for 2026.
           </p>
         </Section>
+
+        {education.length > 0 && (
+          <Section title="Education">
+            <ul className="space-y-3">
+              {education.map((e) => (
+                <li key={e.school + e.degree}>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span>
+                      <strong className="font-semibold">{e.school}</strong>
+                      <span className="text-[#444]"> — {e.degree}</span>
+                    </span>
+                    <span className="text-[0.82rem] text-[#666] tabular-nums shrink-0">
+                      {fmtMonth(e.start)} – {fmtMonth(e.end)}
+                    </span>
+                  </div>
+                  <div className="text-[0.86rem] text-[#444] mt-0.5">
+                    {e.location && <span>{e.location}</span>}
+                    {e.gpa && (
+                      <>
+                        {e.location && <span> · </span>}
+                        <span>GPA {e.gpa}</span>
+                      </>
+                    )}
+                    {e.honors && (
+                      <>
+                        {(e.location || e.gpa) && <span> · </span>}
+                        <span>{e.honors}</span>
+                      </>
+                    )}
+                  </div>
+                  {e.coursework && e.coursework.length > 0 && (
+                    <div className="text-[0.84rem] text-[#444] mt-0.5">
+                      <span className="font-medium text-[#222]">Coursework:</span>{" "}
+                      {e.coursework.join(" · ")}
+                    </div>
+                  )}
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+
+        {experience.length > 0 && (
+          <Section title="Experience">
+            <ul className="space-y-4">
+              {experience.map((x) => (
+                <li key={x.company + x.role + x.start}>
+                  <div className="flex items-baseline justify-between gap-2">
+                    <span>
+                      <strong className="font-semibold">
+                        {x.href ? (
+                          <a href={x.href} className="underline decoration-[#999]">
+                            {x.company}
+                          </a>
+                        ) : (
+                          x.company
+                        )}
+                      </strong>
+                      <span className="text-[#444]"> — {x.role}</span>
+                    </span>
+                    <span className="text-[0.82rem] text-[#666] tabular-nums shrink-0">
+                      {fmtMonth(x.start)} – {fmtMonth(x.end)}
+                    </span>
+                  </div>
+                  {x.location && (
+                    <div className="text-[0.84rem] text-[#666] mt-0.5">
+                      {x.location}
+                    </div>
+                  )}
+                  <ul className="mt-1.5 ml-4 list-disc list-outside text-[0.9rem] leading-[1.5] marker:text-[#888] space-y-0.5">
+                    {x.bullets.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
 
         <Section title="Selected projects">
           <ul className="space-y-3">
@@ -92,8 +192,40 @@ export default function CVPage() {
                 <dd className="text-[#111]">{s.items}</dd>
               </div>
             ))}
+            {extras.languages && (
+              <div className="contents">
+                <dt className="font-medium text-[#444] capitalize">languages</dt>
+                <dd className="text-[#111]">{extras.languages}</dd>
+              </div>
+            )}
           </dl>
         </Section>
+
+        {awards.length > 0 && (
+          <Section title="Awards &amp; honors">
+            <ul className="space-y-1 text-[0.92rem]">
+              {awards.map((a) => (
+                <li key={a.name + a.year} className="flex items-baseline gap-2">
+                  <span className="text-[0.82rem] text-[#666] tabular-nums shrink-0 w-12">
+                    {a.year}
+                  </span>
+                  <span>
+                    <strong className="font-semibold">
+                      {a.href ? (
+                        <a href={a.href} className="underline decoration-[#999]">
+                          {a.name}
+                        </a>
+                      ) : (
+                        a.name
+                      )}
+                    </strong>
+                    {a.note && <span className="text-[#444]"> — {a.note}</span>}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
 
         <Section title="Looking for">
           <ul className="space-y-1 text-[0.92rem] list-disc list-inside marker:text-[#888]">
