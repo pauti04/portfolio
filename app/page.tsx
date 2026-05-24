@@ -69,6 +69,7 @@ export default function Home() {
       <TopBar />
       <div className="relative mx-auto max-w-[920px] px-5 sm:px-6 pt-28 pb-20">
         <Hero />
+        <Highlights />
         <GitHubStats />
         <Work />
         {experience.length > 0 && <ExperienceSection />}
@@ -128,74 +129,131 @@ function TopBar() {
 
 function Hero() {
   return (
-    <section id="cover" className="pt-10 pb-24 md:pt-16 md:pb-32">
-      <div className="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.24em] text-[var(--color-muted)] mono fade-in">
+    <section id="cover" className="pt-12 pb-20 md:pt-16 md:pb-24">
+      <div className="eyebrow fade-in">
         <span className="relative flex h-1.5 w-1.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-70" />
           <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
         </span>
-        <span>looking for 2026 grad / internship roles</span>
+        looking for 2026 grad / internship roles
       </div>
 
-      <h1 className="display text-[4rem] md:text-[7.5rem] leading-[0.92] tracking-[-0.025em] text-[var(--color-fg)] mt-8 fade-in d-1">
-        Parth
-        <span className="text-[var(--color-accent)]">.</span>
+      <h1 className="serif text-[3rem] md:text-[4.4rem] leading-[1.02] tracking-[-0.025em] text-[var(--color-fg)] mt-6 fade-in d-1 font-semibold lowercase">
+        hi, i&apos;m parth.
+        <br />
+        <span className="text-[var(--color-accent)]">i build small things and try to break them.</span>
       </h1>
 
-      <p className="display italic text-[1.6rem] md:text-[2.4rem] leading-[1.2] text-[var(--color-fg-soft)] mt-4 max-w-[24ch] fade-in d-2">
-        i build small fast things, and try to measure them.
+      <p className="text-[1.02rem] md:text-[1.12rem] leading-[1.65] text-[var(--color-fg-soft)] mt-7 max-w-[58ch] fade-in d-2">
+        {education[0] ? (
+          <>
+            {education[0].degree.match(/^B\.?S\.?/i) ? "CS undergrad" : "Student"}{" "}
+            at{" "}
+            <span className="text-[var(--color-fg)]">{education[0].school}</span>
+            .{" "}
+          </>
+        ) : (
+          <>CS undergrad. </>
+        )}
+        mostly write Rust and Python; some TypeScript I usually regret later.
+        spend my weekends on a low-latency matching engine, a BGP hijack
+        detector that finally caught a real one last month, and a GNN that
+        thinks it understands my AWS bill.
       </p>
 
-      <div className="mt-12 grid md:grid-cols-[1fr_auto] gap-x-12 gap-y-6 items-start fade-in d-3">
-        <p className="text-[1.02rem] md:text-[1.1rem] leading-[1.7] text-[var(--color-fg-soft)] max-w-[54ch]">
-          {education[0] ? (
-            <>
-              {education[0].degree.match(/^B\.?S\.?/i) ? "CS undergrad" : "Student"}{" "}
-              at{" "}
-              <span className="text-[var(--color-fg)]">{education[0].school}</span>
-              .{" "}
-            </>
-          ) : (
-            <>CS undergrad. </>
-          )}
-          mostly Rust and Python — a low-latency matching engine, a BGP hijack
-          detector wired to ris-live, a GNN that thinks it understands my AWS
-          bill. looking for a new-grad SWE or ML-infra seat in 2026.
-        </p>
-        <div className="flex flex-col gap-2 md:items-end">
-          <a href={`mailto:${social.email}`} className="btn btn-primary">
-            email me <span aria-hidden>→</span>
-          </a>
-          <div className="flex items-center gap-3 text-[0.86rem] text-[var(--color-fg-soft)]">
-            <Link href="/cv" target="_blank" className="hover:text-[var(--color-accent)] transition">
-              CV ↗
-            </Link>
-            <span className="text-[var(--color-muted)]">·</span>
-            <a href="#work" className="hover:text-[var(--color-accent)] transition">
-              the work ↓
-            </a>
-          </div>
-        </div>
+      <p className="text-[0.92rem] text-[var(--color-muted)] mt-4 fade-in d-2 leading-relaxed">
+        looking for a place to keep doing this in 2026 — new-grad SWE or
+        ML-infra. remote works, relocating works. email is the fastest way to
+        reach me.
+      </p>
+
+      <div className="mt-9 flex flex-wrap items-center gap-3 fade-in d-3">
+        <a href={`mailto:${social.email}`} className="btn btn-primary">
+          say hi
+          <span aria-hidden>→</span>
+        </a>
+        <Link href="/cv" target="_blank" className="btn btn-ghost">
+          CV
+          <span aria-hidden>↗</span>
+        </Link>
+        <a href="#work" className="btn btn-ghost">
+          see the work
+        </a>
       </div>
 
-      <div className="mt-20 pt-8 border-t border-[var(--color-line)] grid grid-cols-2 md:grid-cols-4 gap-x-10 gap-y-10 fade-in d-4">
+      <div className="mt-14 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 fade-in d-4">
         {numbers.map((n) => (
           <div key={n.label}>
             <div className="numeral">{n.value}</div>
-            <div className="text-[0.86rem] mt-2.5 text-[var(--color-fg)]">{n.label}</div>
+            <div className="text-[0.86rem] mt-2.5 text-[var(--color-fg)]">
+              {n.label}
+            </div>
             <div className="text-[0.74rem] mt-1 text-[var(--color-muted)] leading-relaxed">
               {n.note}
             </div>
           </div>
         ))}
       </div>
-      <p className="mt-5 text-[0.78rem] text-[var(--color-muted)] italic max-w-[58ch] fade-in d-4">
+      <p className="mt-6 text-[0.78rem] text-[var(--color-muted)] italic max-w-[58ch] fade-in d-4">
         numbers from{" "}
         <a href="https://github.com/pauti04/netpulse/blob/main/BENCHMARK.md" target="_blank" rel="noreferrer" className="link">
           NetPulse&apos;s benchmark doc
         </a>
         . the matching-engine one you can stress-test yourself further down.
       </p>
+    </section>
+  );
+}
+
+const ASK_BULLETS = [
+  "new-grad SWE or ML-infra, 2026 start",
+  "remote or relocate, either works",
+  "strongest in Rust, Python; comfy with TS, some C",
+  "free to interview from June 2026 onward",
+];
+
+function Highlights() {
+  return (
+    <section className="mb-14 rounded-xl border border-[var(--color-line)] bg-[var(--color-bg-soft)]/40 p-5">
+      <div className="text-[0.78rem] text-[var(--color-fg-soft)] mb-3">
+        what I&apos;m looking for
+      </div>
+      <ul className="space-y-1.5">
+        {ASK_BULLETS.map((b) => (
+          <li
+            key={b}
+            className="flex items-start gap-2.5 text-[0.92rem] text-[var(--color-fg-soft)] leading-snug"
+          >
+            <span className="text-[var(--color-accent)] mt-[3px]">→</span>
+            <span>{b}</span>
+          </li>
+        ))}
+      </ul>
+      <div className="mt-4 pt-3 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-[var(--color-line)] text-[0.84rem]">
+        <a
+          href={`mailto:${social.email}`}
+          className="text-[var(--color-accent)] hover:underline"
+        >
+          say hi →
+        </a>
+        <span className="text-[var(--color-muted)]">·</span>
+        <Link
+          href="/cv"
+          target="_blank"
+          className="text-[var(--color-fg-soft)] hover:text-[var(--color-fg)]"
+        >
+          CV ↗
+        </Link>
+        <span className="text-[var(--color-muted)]">·</span>
+        <a
+          href={social.github}
+          target="_blank"
+          rel="noreferrer"
+          className="text-[var(--color-fg-soft)] hover:text-[var(--color-fg)]"
+        >
+          GitHub
+        </a>
+      </div>
     </section>
   );
 }
@@ -229,7 +287,7 @@ function Work() {
                   </Link>
                   <span className="ml-auto tabular-nums">{p.year}</span>
                 </div>
-                <h3 className="display text-[2.4rem] md:text-[3rem] leading-[1] tracking-[-0.012em] text-[var(--color-fg)]">
+                <h3 className="serif text-[2rem] md:text-[2.4rem] leading-[1.04] tracking-[-0.022em] text-[var(--color-fg)] font-semibold">
                   <Link
                     href={`/work/${p.artifact}`}
                     className="hover:text-[var(--color-accent)] transition"
@@ -237,7 +295,7 @@ function Work() {
                     {p.name}
                   </Link>
                 </h3>
-                <p className="display italic text-[1.2rem] text-[var(--color-fg-soft)] mt-1">
+                <p className="serif italic text-[1.05rem] text-[var(--color-fg-soft)] mt-1">
                   {p.tagline}
                 </p>
               </header>
@@ -478,9 +536,9 @@ function Contact() {
       className="my-20 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-soft)]/60 p-9 md:p-12"
     >
       <SectionLabel n="04" title="say hi" />
-      <h2 className="display text-[2.4rem] md:text-[3.4rem] leading-[1.05] tracking-[-0.012em] text-[var(--color-fg)] mt-7 max-w-[24ch]">
-        Building something where systems and ML meet?{" "}
-        <span className="text-[var(--color-accent)] italic">let&apos;s talk.</span>
+      <h2 className="serif text-[2.1rem] md:text-[2.8rem] leading-[1.05] tracking-[-0.022em] text-[var(--color-fg)] font-semibold mt-7 max-w-[22ch] lowercase">
+        building something where systems and ML meet?{" "}
+        <span className="text-[var(--color-accent)]">let&apos;s talk.</span>
       </h2>
       <p className="text-[1rem] leading-[1.7] text-[var(--color-fg-soft)] mt-5 max-w-[56ch]">
         I&apos;m looking for new-grad and internship roles for 2026.
@@ -565,11 +623,11 @@ function Footer() {
 
 function SectionLabel({ n, title }: { n: string; title: string }) {
   return (
-    <div className="flex items-baseline gap-5">
-      <span className="text-[0.7rem] tabular-nums text-[var(--color-muted)] font-mono uppercase tracking-[0.2em]">
-        § {n}
+    <div className="flex items-baseline gap-4">
+      <span className="text-[0.78rem] tabular-nums text-[var(--color-accent)] font-mono">
+        {n}.
       </span>
-      <h2 className="display italic text-[2rem] md:text-[2.4rem] text-[var(--color-fg)] tracking-[-0.012em]">
+      <h2 className="serif text-[1.55rem] md:text-[1.75rem] text-[var(--color-fg)] tracking-[-0.012em] font-medium">
         {title}
       </h2>
       <span className="flex-1 h-px bg-[var(--color-line)] translate-y-[-3px]" />
