@@ -4,15 +4,15 @@
   --font-sans: "Geist", "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
-  --color-bg: #09090b;
-  --color-bg-soft: #111114;
-  --color-bg-elevated: #18181b;
-  --color-bg-sunken: #050507;
+  --color-bg: #07090f;
+  --color-bg-soft: #0e1320;
+  --color-bg-elevated: #131a2a;
+  --color-bg-sunken: #04060a;
   --color-fg: #fafafa;
-  --color-fg-soft: #d4d4d8;
-  --color-muted: #9ca3af;
-  --color-line: #1f1f23;
-  --color-line-soft: #16161a;
+  --color-fg-soft: #d4dcec;
+  --color-muted: #9aa6c2;
+  --color-line: #1d2540;
+  --color-line-soft: #131a2a;
   --color-accent: #60a5fa;
   --color-accent-soft: #3b82f6;
   --color-rose: #fb7185;
@@ -32,8 +32,11 @@ html, body {
 
 body {
   background-image:
-    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
-  background-size: 24px 24px;
+    radial-gradient(ellipse 80% 60% at 20% 0%, rgba(59, 130, 246, 0.16) 0%, transparent 55%),
+    radial-gradient(ellipse 70% 50% at 100% 30%, rgba(96, 165, 250, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 60% 50% at 50% 110%, rgba(59, 130, 246, 0.10) 0%, transparent 55%),
+    radial-gradient(circle at 1px 1px, rgba(125, 184, 255, 0.07) 1px, transparent 0);
+  background-size: 100% 100%, 100% 100%, 100% 100%, 24px 24px;
   background-attachment: fixed;
 }
 
@@ -196,15 +199,16 @@ html { scroll-behavior: smooth; }
 
 .chip-live {
   color: var(--color-accent);
-  background: rgba(96, 165, 250, 0.06);
-  border-color: rgba(96, 165, 250, 0.22);
+  background: rgba(96, 165, 250, 0.10);
+  border-color: rgba(96, 165, 250, 0.35);
+  box-shadow: 0 0 16px -4px rgba(96, 165, 250, 0.30);
 }
 
 .glass {
-  background: linear-gradient(180deg, rgba(255,255,255,0.025) 0%, rgba(255,255,255,0.005) 100%);
-  border: 1px solid var(--color-line);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: linear-gradient(180deg, rgba(96,165,250,0.06) 0%, rgba(59,130,246,0.02) 100%);
+  border: 1px solid rgba(96,165,250,0.18);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   position: relative;
 }
 .glass::before {
@@ -213,7 +217,7 @@ html { scroll-behavior: smooth; }
   inset: 0;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, transparent 50%);
+  background: linear-gradient(180deg, rgba(125,184,255,0.22) 0%, rgba(96,165,250,0.04) 50%, transparent 100%);
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
@@ -225,10 +229,12 @@ html { scroll-behavior: smooth; }
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.25s ease, background 0.2s ease;
 }
 .tile-hover:hover {
-  border-color: rgba(96,165,250,0.4);
+  border-color: rgba(96,165,250,0.5);
   transform: translateY(-2px);
-  box-shadow: 0 20px 40px -22px rgba(0,0,0,0.5), 0 0 0 1px rgba(96,165,250,0.12) inset;
-  background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.008) 100%);
+  box-shadow:
+    0 20px 50px -20px rgba(59, 130, 246, 0.35),
+    0 0 0 1px rgba(96,165,250,0.20) inset;
+  background: linear-gradient(180deg, rgba(96,165,250,0.10) 0%, rgba(59,130,246,0.03) 100%);
 }
 
 .eyebrow {
@@ -240,8 +246,8 @@ html { scroll-behavior: smooth; }
   font-family: var(--font-mono);
   font-weight: 500;
   color: var(--color-fg-soft);
-  background: transparent;
-  border: 1px solid var(--color-line);
+  background: rgba(96, 165, 250, 0.05);
+  border: 1px solid rgba(96, 165, 250, 0.25);
   border-radius: 999px;
   letter-spacing: 0.04em;
 }
@@ -252,8 +258,13 @@ html { scroll-behavior: smooth; }
   font-weight: 600;
   font-size: 2.4rem;
   line-height: 1;
-  color: var(--color-fg);
+  color: var(--color-accent);
   letter-spacing: -0.03em;
+  background: linear-gradient(180deg, #93c5fd 0%, #60a5fa 60%, #3b82f6 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px rgba(96,165,250,0.20);
 }
 
 @media (min-width: 768px) {
