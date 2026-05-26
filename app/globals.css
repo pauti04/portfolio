@@ -155,11 +155,14 @@ html { scroll-behavior: smooth; }
 }
 
 .btn-primary {
-  background: var(--color-accent);
+  background: linear-gradient(180deg, #7db8ff 0%, var(--color-accent) 100%);
   color: #0a0a0b;
-  box-shadow: 0 4px 16px -8px rgba(96, 165, 250, 0.4);
+  box-shadow: 0 1px 0 rgba(255,255,255,0.25) inset, 0 8px 24px -10px rgba(96, 165, 250, 0.5);
 }
-.btn-primary:hover { background: #7db8ff; }
+.btn-primary:hover {
+  background: linear-gradient(180deg, #93c5fd 0%, #7db8ff 100%);
+  transform: translateY(-1px);
+}
 
 .btn-ghost {
   background: transparent;

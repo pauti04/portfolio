@@ -129,7 +129,24 @@ function TopBar() {
 
 function Hero() {
   return (
-    <section id="cover" className="pt-12 pb-20 md:pt-16 md:pb-24">
+    <section id="cover" className="relative pt-12 pb-20 md:pt-16 md:pb-24">
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 55% at 50% 30%, rgba(96,165,250,0.18) 0%, rgba(96,165,250,0.06) 35%, transparent 65%)",
+        }}
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 -z-10 pointer-events-none opacity-[0.025]"
+        style={{
+          backgroundImage:
+            "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>\")",
+        }}
+      />
+
       <div className="eyebrow fade-in">
         <span className="relative flex h-1.5 w-1.5">
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-70" />
@@ -141,7 +158,9 @@ function Hero() {
       <h1 className="serif text-[3rem] md:text-[4.4rem] leading-[1.02] tracking-[-0.025em] text-[var(--color-fg)] mt-6 fade-in d-1 font-semibold lowercase">
         hi, i&apos;m parth.
         <br />
-        <span className="text-[var(--color-accent)]">i build small things and try to break them.</span>
+        <span className="bg-clip-text text-transparent bg-gradient-to-br from-[#7db8ff] via-[#60a5fa] to-[#3b82f6]">
+          i build small things and try to break them.
+        </span>
       </h1>
 
       <p className="text-[1.02rem] md:text-[1.12rem] leading-[1.65] text-[var(--color-fg-soft)] mt-7 max-w-[58ch] fade-in d-2">
