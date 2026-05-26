@@ -236,15 +236,13 @@ function Card({
 }) {
   return (
     <div
-      className={`relative rounded-xl border border-[var(--color-line)] bg-gradient-to-b from-[var(--color-bg-soft)]/55 to-[var(--color-bg-soft)]/20 overflow-hidden ${
-        hoverable
-          ? "transition hover:border-[var(--color-accent)]/45 hover:bg-[var(--color-bg-soft)]/70"
-          : ""
+      className={`glass rounded-xl overflow-hidden ${
+        hoverable ? "tile-hover" : ""
       } ${className}`}
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"
       />
       {children}
     </div>

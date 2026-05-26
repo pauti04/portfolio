@@ -289,25 +289,32 @@ function Work() {
         ris-live right now. nothing here is a screenshot — poke at it.
       </p>
 
-      <div className="space-y-24">
+      <div className="space-y-20">
         {projects.map((p) => {
           const Demo = DEMOS[p.artifact];
           return (
-            <article key={p.name} id={`card-${p.artifact}`} className="fade-in">
-              <header>
-                <div className="flex items-baseline gap-3 text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] font-mono mb-3">
+            <article
+              key={p.name}
+              id={`card-${p.artifact}`}
+              className="fade-in glass rounded-2xl p-6 md:p-8 tile-hover"
+            >
+              <header className="flex items-start justify-between gap-4 flex-wrap mb-4">
+                <div className="flex items-baseline gap-3 text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] font-mono">
                   <span className="text-[var(--color-accent)] tabular-nums">
                     No. {p.index}
                   </span>
                   <span className="w-5 h-px bg-[var(--color-line)]" />
-                  <Link
-                    href={`/work/${p.artifact}`}
-                    className="text-[var(--color-accent)] hover:underline"
-                  >
-                    Live demo + deep dive →
-                  </Link>
-                  <span className="ml-auto tabular-nums">{p.year}</span>
+                  <span className="chip chip-live !py-[1px]">
+                    <span className="w-1 h-1 rounded-full bg-[var(--color-accent)]" />
+                    Live demo
+                  </span>
                 </div>
+                <span className="text-[0.78rem] text-[var(--color-muted)] tabular-nums font-mono">
+                  {p.year}
+                </span>
+              </header>
+
+              <div className="grid md:grid-cols-[1fr_auto] gap-x-6 gap-y-3 items-baseline">
                 <h3 className="serif text-[2rem] md:text-[2.4rem] leading-[1.04] tracking-[-0.022em] text-[var(--color-fg)] font-semibold">
                   <Link
                     href={`/work/${p.artifact}`}
@@ -316,12 +323,18 @@ function Work() {
                     {p.name}
                   </Link>
                 </h3>
-                <p className="serif italic text-[1.05rem] text-[var(--color-fg-soft)] mt-1">
-                  {p.tagline}
-                </p>
-              </header>
+                <Link
+                  href={`/work/${p.artifact}`}
+                  className="text-[0.82rem] text-[var(--color-accent)] hover:underline shrink-0 mono"
+                >
+                  deep dive →
+                </Link>
+              </div>
+              <p className="serif italic text-[1.05rem] text-[var(--color-fg-soft)] mt-1">
+                {p.tagline}
+              </p>
 
-              <p className="text-[0.98rem] leading-[1.78] text-[var(--color-fg-soft)] mt-6 max-w-[62ch]">
+              <p className="text-[0.98rem] leading-[1.78] text-[var(--color-fg-soft)] mt-5 max-w-[62ch]">
                 {p.blurb}
                 {NOTES[p.artifact]?.map((note, i) => (
                   <span key={i}>
@@ -331,7 +344,7 @@ function Work() {
                 ))}
               </p>
 
-              <div className="mt-7">
+              <div className="mt-6">
                 <LazyDemo label={`${p.name} live demo`}>
                   <Demo />
                 </LazyDemo>
@@ -349,7 +362,7 @@ function Work() {
               {WRITEUP[p.artifact] && (
                 <Link
                   href={WRITEUP[p.artifact].href}
-                  className="mt-5 group flex items-center justify-between gap-4 rounded-xl border border-[var(--color-line)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/5 px-5 py-4 transition"
+                  className="mt-5 group flex items-center justify-between gap-4 rounded-xl border border-[var(--color-line)] hover:border-[var(--color-accent)]/50 hover:bg-[rgba(96,165,250,0.04)] px-5 py-4 transition"
                 >
                   <div className="min-w-0">
                     <div className="text-[0.66rem] uppercase tracking-[0.18em] text-[var(--color-muted)] mb-0.5 flex items-center gap-2 font-mono">
@@ -369,7 +382,7 @@ function Work() {
                 </Link>
               )}
 
-              <footer className="mt-7 pt-5 border-t border-[var(--color-line)] flex items-center justify-between gap-4 flex-wrap">
+              <footer className="mt-6 pt-5 border-t border-[var(--color-line)] flex items-center justify-between gap-4 flex-wrap">
                 <div className="flex flex-wrap gap-1.5">
                   {p.stack.split(" · ").map((s) => (
                     <span key={s} className="chip">
@@ -378,12 +391,6 @@ function Work() {
                   ))}
                 </div>
                 <div className="flex items-center gap-5 text-[0.9rem]">
-                  <Link
-                    href={`/work/${p.artifact}`}
-                    className="text-[var(--color-fg)] hover:text-[var(--color-accent)] transition font-medium"
-                  >
-                    Deep dive →
-                  </Link>
                   <a
                     href={p.repo}
                     target="_blank"
@@ -554,8 +561,17 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="my-20 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-soft)]/60 p-9 md:p-12"
+      className="relative my-20 rounded-2xl glass p-9 md:p-12 overflow-hidden"
     >
+      <div
+        aria-hidden
+        className="absolute -top-24 -right-24 w-72 h-72 rounded-full pointer-events-none"
+        style={{
+          background: "rgba(96,165,250,0.20)",
+          filter: "blur(60px)",
+        }}
+      />
+      <div className="relative">
       <SectionLabel n="04" title="say hi" />
       <h2 className="serif text-[2.1rem] md:text-[2.8rem] leading-[1.05] tracking-[-0.022em] text-[var(--color-fg)] font-semibold mt-7 max-w-[22ch] lowercase">
         building something where systems and ML meet?{" "}
@@ -588,6 +604,7 @@ function Contact() {
         already a better signal than any cold-recruit email I&apos;ve ever sent.
         thank you for reading.
       </p>
+      </div>
     </section>
   );
 }
