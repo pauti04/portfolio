@@ -16,6 +16,7 @@ import CodeBlock, {
 import LazyDemo from "./components/LazyDemo";
 import GitHubStats from "./components/GitHubStats";
 import MarginNote from "./components/MarginNote";
+import HeroArt from "./components/HeroArt";
 
 const DEMOS: Record<string, React.ComponentType> = {
   netpulse: NetPulseDemo,
@@ -135,7 +136,7 @@ function Hero() {
         className="absolute inset-0 -z-10 pointer-events-none"
         style={{
           background:
-            "radial-gradient(ellipse 70% 55% at 50% 30%, rgba(96,165,250,0.18) 0%, rgba(96,165,250,0.06) 35%, transparent 65%)",
+            "radial-gradient(ellipse 70% 55% at 65% 30%, rgba(96,165,250,0.22) 0%, rgba(96,165,250,0.07) 35%, transparent 65%)",
         }}
       />
       <div
@@ -147,60 +148,68 @@ function Hero() {
         }}
       />
 
-      <div className="eyebrow fade-in">
-        <span className="relative flex h-1.5 w-1.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-70" />
-          <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
-        </span>
-        looking for 2026 grad / internship roles
+      <div className="grid md:grid-cols-[1.05fr_0.95fr] gap-x-12 gap-y-10 items-center">
+        <div>
+          <div className="eyebrow fade-in">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-70" />
+              <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
+            </span>
+            looking for 2026 grad / internship roles
+          </div>
+
+          <h1 className="serif text-[2.8rem] md:text-[3.8rem] leading-[1.02] tracking-[-0.025em] text-[var(--color-fg)] mt-6 fade-in d-1 font-semibold lowercase">
+            hi, i&apos;m parth.
+            <br />
+            <span className="bg-clip-text text-transparent bg-gradient-to-br from-[#7db8ff] via-[#60a5fa] to-[#3b82f6]">
+              i build small things and try to break them.
+            </span>
+          </h1>
+
+          <p className="text-[1.02rem] leading-[1.65] text-[var(--color-fg-soft)] mt-7 max-w-[52ch] fade-in d-2">
+            {education[0] ? (
+              <>
+                {education[0].degree.match(/^B\.?S\.?/i) ? "CS undergrad" : "Student"}{" "}
+                at{" "}
+                <span className="text-[var(--color-fg)]">{education[0].school}</span>
+                .{" "}
+              </>
+            ) : (
+              <>CS undergrad. </>
+            )}
+            mostly write Rust and Python; some TypeScript I usually regret
+            later. spend my weekends on a low-latency matching engine, a BGP
+            hijack detector that finally caught a real one last month, and a
+            GNN that thinks it understands my AWS bill.
+          </p>
+
+          <p className="text-[0.92rem] text-[var(--color-muted)] mt-4 fade-in d-2 leading-relaxed max-w-[52ch]">
+            looking for a place to keep doing this in 2026 — new-grad SWE or
+            ML-infra. remote works, relocating works. email is the fastest
+            way to reach me.
+          </p>
+
+          <div className="mt-9 flex flex-wrap items-center gap-3 fade-in d-3">
+            <a href={`mailto:${social.email}`} className="btn btn-primary">
+              say hi
+              <span aria-hidden>→</span>
+            </a>
+            <Link href="/cv" target="_blank" className="btn btn-ghost">
+              CV
+              <span aria-hidden>↗</span>
+            </Link>
+            <a href="#work" className="btn btn-ghost">
+              see the work
+            </a>
+          </div>
+        </div>
+
+        <div className="fade-in d-3 order-first md:order-last">
+          <HeroArt />
+        </div>
       </div>
 
-      <h1 className="serif text-[3rem] md:text-[4.4rem] leading-[1.02] tracking-[-0.025em] text-[var(--color-fg)] mt-6 fade-in d-1 font-semibold lowercase">
-        hi, i&apos;m parth.
-        <br />
-        <span className="bg-clip-text text-transparent bg-gradient-to-br from-[#7db8ff] via-[#60a5fa] to-[#3b82f6]">
-          i build small things and try to break them.
-        </span>
-      </h1>
-
-      <p className="text-[1.02rem] md:text-[1.12rem] leading-[1.65] text-[var(--color-fg-soft)] mt-7 max-w-[58ch] fade-in d-2">
-        {education[0] ? (
-          <>
-            {education[0].degree.match(/^B\.?S\.?/i) ? "CS undergrad" : "Student"}{" "}
-            at{" "}
-            <span className="text-[var(--color-fg)]">{education[0].school}</span>
-            .{" "}
-          </>
-        ) : (
-          <>CS undergrad. </>
-        )}
-        mostly write Rust and Python; some TypeScript I usually regret later.
-        spend my weekends on a low-latency matching engine, a BGP hijack
-        detector that finally caught a real one last month, and a GNN that
-        thinks it understands my AWS bill.
-      </p>
-
-      <p className="text-[0.92rem] text-[var(--color-muted)] mt-4 fade-in d-2 leading-relaxed">
-        looking for a place to keep doing this in 2026 — new-grad SWE or
-        ML-infra. remote works, relocating works. email is the fastest way to
-        reach me.
-      </p>
-
-      <div className="mt-9 flex flex-wrap items-center gap-3 fade-in d-3">
-        <a href={`mailto:${social.email}`} className="btn btn-primary">
-          say hi
-          <span aria-hidden>→</span>
-        </a>
-        <Link href="/cv" target="_blank" className="btn btn-ghost">
-          CV
-          <span aria-hidden>↗</span>
-        </Link>
-        <a href="#work" className="btn btn-ghost">
-          see the work
-        </a>
-      </div>
-
-      <div className="mt-14 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 fade-in d-4">
+      <div className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 fade-in d-4">
         {numbers.map((n) => (
           <div key={n.label}>
             <div className="numeral">{n.value}</div>
