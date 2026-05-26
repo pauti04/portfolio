@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import Spotlight from "./components/Spotlight";
+import ScrollReveal from "./components/ScrollReveal";
 import "./globals.css";
 
 const SITE_URL = "https://pauti04.dev";
@@ -87,6 +89,8 @@ export default function RootLayout({
           Skip to content
         </a>
         {children}
+        <Spotlight />
+        <ScrollReveal />
         <SpeedInsights />
         <Analytics />
       </body>
