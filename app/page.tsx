@@ -70,7 +70,6 @@ export default function Home() {
       <TopBar />
       <div className="relative mx-auto max-w-[920px] px-5 sm:px-6 pt-28 pb-20">
         <Hero />
-        <Highlights />
         <GitHubStats />
         <Work />
         {experience.length > 0 && <ExperienceSection />}
@@ -222,59 +221,6 @@ function Hero() {
         </a>
         . the matching-engine one you can stress-test yourself further down.
       </p>
-    </section>
-  );
-}
-
-const ASK_BULLETS = [
-  "new-grad SWE or ML-infra, 2026 start",
-  "remote or relocate, either works",
-  "strongest in Rust, Python; comfy with TS, some C",
-  "free to interview from June 2026 onward",
-];
-
-function Highlights() {
-  return (
-    <section className="mb-14 rounded-xl border border-[var(--color-line)] bg-[var(--color-bg-soft)]/40 p-5">
-      <div className="text-[0.78rem] text-[var(--color-fg-soft)] mb-3">
-        what I&apos;m looking for
-      </div>
-      <ul className="space-y-1.5">
-        {ASK_BULLETS.map((b) => (
-          <li
-            key={b}
-            className="flex items-start gap-2.5 text-[0.92rem] text-[var(--color-fg-soft)] leading-snug"
-          >
-            <span className="text-[var(--color-accent)] mt-[3px]">→</span>
-            <span>{b}</span>
-          </li>
-        ))}
-      </ul>
-      <div className="mt-4 pt-3 flex flex-wrap items-center gap-x-2 gap-y-1 border-t border-[var(--color-line)] text-[0.84rem]">
-        <a
-          href={`mailto:${social.email}`}
-          className="text-[var(--color-accent)] hover:underline"
-        >
-          say hi →
-        </a>
-        <span className="text-[var(--color-muted)]">·</span>
-        <Link
-          href="/cv"
-          target="_blank"
-          className="text-[var(--color-fg-soft)] hover:text-[var(--color-fg)]"
-        >
-          CV ↗
-        </Link>
-        <span className="text-[var(--color-muted)]">·</span>
-        <a
-          href={social.github}
-          target="_blank"
-          rel="noreferrer"
-          className="text-[var(--color-fg-soft)] hover:text-[var(--color-fg)]"
-        >
-          GitHub
-        </a>
-      </div>
     </section>
   );
 }
