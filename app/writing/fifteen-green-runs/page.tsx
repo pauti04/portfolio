@@ -22,13 +22,13 @@ export default function Post() {
         </nav>
 
         <header>
-          <div className="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] mb-5">
-            <span className="text-[var(--color-accent)]">No. 02</span>
+          <div className="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] mb-5 font-mono">
+            <span className="annotation">No. 02</span>
             <span className="w-6 h-px bg-[var(--color-line)]" />
             <span>Working notes · Reflight</span>
             <span className="ml-auto tabular-nums">2026 · 6 min read</span>
           </div>
-          <h1 className="serif text-[2.4rem] md:text-[3.2rem] leading-[1.02] tracking-[-0.025em] font-semibold text-[var(--color-fg)]">
+          <h1 className="serif text-[2.8rem] md:text-[3.6rem] leading-[1.02] tracking-[-0.025em] font-semibold text-[var(--color-fg)]">
             Fifteen green runs booked a meeting on a{" "}
             <span className="text-[var(--color-accent)]">Sunday</span>.
           </h1>
@@ -43,7 +43,7 @@ export default function Post() {
 
         <article className="space-y-6 text-[1rem] leading-[1.75] text-[var(--color-fg-soft)]">
           <p>
-            <span className="serif text-[2.6rem] leading-[0.85] float-left mr-2 mt-1 text-[var(--color-accent)] font-medium">
+            <span className="serif text-[2.6rem] leading-[0.85] float-left mr-2 mt-1 text-[var(--color-amber)] font-medium">
               E
             </span>
             verything below actually happened, against a live API, on July 10,
@@ -78,7 +78,7 @@ export default function Post() {
             fifteen live runs: under a cent.
           </p>
 
-          <h2 className="serif text-[1.6rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
+          <h2 className="serif text-[1.8rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
             What happened
           </h2>
 
@@ -128,7 +128,7 @@ export default function Post() {
             retry-and-compare can surface.
           </p>
 
-          <h2 className="serif text-[1.6rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
+          <h2 className="serif text-[1.8rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
             What caught it — and what almost didn&apos;t
           </h2>
 
@@ -168,7 +168,7 @@ export default function Post() {
             recording — CI runs included — gets checked against it for $0.00.
           </p>
 
-          <h2 className="serif text-[1.6rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
+          <h2 className="serif text-[1.8rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
             Why this needed a flight recorder
           </h2>
 
@@ -207,7 +207,7 @@ export default function Post() {
             times as you like, for free.
           </p>
 
-          <h2 className="serif text-[1.6rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
+          <h2 className="serif text-[1.8rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
             Footnote: what the microscope caught in itself
           </h2>
 

@@ -34,8 +34,8 @@ export default function MarginNote({
         onClick={() => setOpen((o) => !o)}
         className={`text-[0.66em] mx-[1px] tabular-nums align-super focus:outline-none transition ${
           open
-            ? "text-[var(--color-bg)] bg-[var(--color-accent)] px-[3px] rounded-sm"
-            : "text-[var(--color-accent)] hover:underline"
+            ? "text-[var(--color-bg)] bg-[var(--color-amber)] px-[3px] rounded-sm"
+            : "text-[var(--color-amber)] hover:underline"
         }`}
         aria-expanded={open}
       >
@@ -47,7 +47,7 @@ export default function MarginNote({
           className="absolute z-30 left-1/2 -translate-x-1/2 mt-2 top-full w-[280px] p-3.5 text-[0.84rem] leading-[1.55] text-[var(--color-fg)] bg-[var(--color-bg)] border border-[var(--color-line)] rounded-lg shadow-[0_18px_40px_-18px_rgba(31,30,28,0.28)]"
           style={{ animation: "fade-in 0.18s ease-out both" }}
         >
-          <span className="block text-[0.6rem] uppercase tracking-[0.18em] text-[var(--color-accent)] mb-1.5">
+          <span className="block text-[0.6rem] uppercase tracking-[0.18em] text-[var(--color-amber)] mb-1.5">
             Note {n}
           </span>
           <span className="italic text-[var(--color-fg-soft)]">{children}</span>

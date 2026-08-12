@@ -70,9 +70,9 @@ async function fetchStats(): Promise<typeof FALLBACK> {
 export default async function GitHubStats() {
   const s = await fetchStats();
   return (
-    <section className="mb-16 rounded-2xl border border-[var(--color-line)] bg-[var(--color-bg-soft)]/45 overflow-hidden backdrop-blur">
+    <section className="regmark mb-16 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg-soft)] overflow-hidden">
       <div className="flex items-center justify-between px-5 py-3 border-b border-[var(--color-line)]">
-        <span className="text-[0.7rem] uppercase tracking-[0.2em] text-[var(--color-fg-soft)] flex items-center gap-2">
+        <span className="annotation flex items-center gap-2">
           <GhMark />
           GitHub · pauti04
         </span>
@@ -105,7 +105,7 @@ export default async function GitHubStats() {
         />
       </div>
       <div className="px-5 py-4 border-t border-[var(--color-line)]">
-        <div className="text-[0.66rem] uppercase tracking-[0.18em] text-[var(--color-muted)] mb-2">
+        <div className="annotation mb-2">
           Most recent / starred repos
         </div>
         <div className="flex flex-wrap gap-2">
@@ -115,7 +115,7 @@ export default async function GitHubStats() {
               href={r.url}
               target="_blank"
               rel="noreferrer"
-              className="group flex items-center gap-2 text-[0.82rem] px-3 py-1.5 rounded-md border border-[var(--color-line)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/5 transition"
+              className="group flex items-center gap-2 text-[0.82rem] px-3 py-1.5 rounded border border-[var(--color-line)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/5 transition"
             >
               <span className="text-[var(--color-fg)] group-hover:text-[var(--color-accent)]">
                 {r.name}

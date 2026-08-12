@@ -23,13 +23,13 @@ export default function Post() {
         </nav>
 
         <header>
-          <div className="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] mb-5">
-            <span className="text-[var(--color-accent)]">No. 01</span>
+          <div className="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] mb-5 font-mono">
+            <span className="annotation">No. 01</span>
             <span className="w-6 h-px bg-[var(--color-line)]" />
             <span>Working notes · NetPulse</span>
             <span className="ml-auto tabular-nums">2026 · 5 min read</span>
           </div>
-          <h1 className="serif text-[2.4rem] md:text-[3.2rem] leading-[1.02] tracking-[-0.025em] font-semibold text-[var(--color-fg)]">
+          <h1 className="serif text-[2.8rem] md:text-[3.6rem] leading-[1.02] tracking-[-0.025em] font-semibold text-[var(--color-fg)]">
             How a patricia trie made RPKI validation{" "}
             <span className="text-[var(--color-accent)]">500×</span> faster.
           </h1>
@@ -43,7 +43,7 @@ export default function Post() {
 
         <article className="space-y-6 text-[1rem] leading-[1.75] text-[var(--color-fg-soft)]">
           <p>
-            <span className="serif text-[2.6rem] leading-[0.85] float-left mr-2 mt-1 text-[var(--color-accent)] font-medium">
+            <span className="serif text-[2.6rem] leading-[0.85] float-left mr-2 mt-1 text-[var(--color-amber)] font-medium">
               R
             </span>
             PKI — the Resource Public Key Infrastructure — is the closest thing the
@@ -64,7 +64,7 @@ export default function Post() {
             <em> fast</em> — line-rate fast.
           </p>
 
-          <h2 className="serif text-[1.6rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
+          <h2 className="serif text-[1.8rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
             The slow version
           </h2>
           <p>
@@ -122,7 +122,7 @@ export default function Post() {
             BGP UPDATEs faster than that, and you can&apos;t miss any.
           </p>
 
-          <h2 className="serif text-[1.6rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
+          <h2 className="serif text-[1.8rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
             The insight
           </h2>
           <p>
@@ -141,7 +141,7 @@ export default function Post() {
             naturally surfaces every ancestor.
           </p>
 
-          <h2 className="serif text-[1.6rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
+          <h2 className="serif text-[1.8rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
             The fix
           </h2>
           <CodeBlock
@@ -157,7 +157,7 @@ export default function Post() {
             }
           />
 
-          <h2 className="serif text-[1.6rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
+          <h2 className="serif text-[1.8rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
             The numbers
           </h2>
           <p>
@@ -167,14 +167,14 @@ export default function Post() {
 
           <ul className="my-5 space-y-2 text-[0.94rem]">
             <li className="flex items-center gap-3">
-              <span className="w-2 h-2 bg-[var(--color-rose)] rounded-full" />
+              <span className="w-2 h-2 bg-[var(--color-rose)] rounded-[2px]" />
               <span>
                 <span className="text-[var(--color-fg)] mono">linear scan: </span>
                 <span className="mono">43.2 ms / call</span>
               </span>
             </li>
             <li className="flex items-center gap-3">
-              <span className="w-2 h-2 bg-[var(--color-accent)] rounded-full" />
+              <span className="w-2 h-2 bg-[var(--color-accent)] rounded-[2px]" />
               <span>
                 <span className="text-[var(--color-fg)] mono">patricia trie: </span>
                 <span className="mono">86 µs / call</span>
@@ -183,7 +183,7 @@ export default function Post() {
               </span>
             </li>
             <li className="flex items-center gap-3">
-              <span className="w-2 h-2 bg-[var(--color-accent)] rounded-full" />
+              <span className="w-2 h-2 bg-[var(--color-accent)] rounded-[2px]" />
               <span>
                 <span className="text-[var(--color-fg)] mono">after rust ext: </span>
                 <span className="mono">43 µs / call</span>
@@ -199,7 +199,7 @@ export default function Post() {
             still have ~99.99% of its time budget left for the other two signals.
           </p>
 
-          <h2 className="serif text-[1.6rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
+          <h2 className="serif text-[1.8rem] font-semibold text-[var(--color-fg)] mt-12 mb-2">
             Lessons I keep relearning
           </h2>
 

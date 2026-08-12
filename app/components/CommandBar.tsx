@@ -254,7 +254,7 @@ export default function CommandBar() {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-[600px] bg-[var(--color-bg)] border border-[var(--color-line)] rounded-2xl shadow-[0_24px_60px_-20px_rgba(0,0,0,0.45)] overflow-hidden"
+            className="w-full max-w-[600px] bg-[var(--color-bg)] border border-[var(--color-line)] rounded-lg shadow-[0_24px_60px_-20px_rgba(0,0,0,0.45)] overflow-hidden"
             role="dialog"
             aria-label="Command palette"
           >
@@ -289,7 +289,7 @@ export default function CommandBar() {
                     .reduce((s, [, arr]) => s + arr.length, 0);
                   return (
                     <li key={groupName}>
-                      <div className="px-5 pt-3 pb-1 text-[0.66rem] uppercase tracking-[0.18em] text-[var(--color-muted)] font-mono">
+                      <div className="annotation px-5 pt-3 pb-1">
                         {groupName}
                       </div>
                       <ul>

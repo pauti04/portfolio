@@ -169,9 +169,9 @@ export default async function HeroBento() {
                     {l.pct}%
                   </span>
                 </div>
-                <div className="mt-0.5 h-[3px] rounded-full bg-[var(--color-line)] overflow-hidden">
+                <div className="mt-0.5 h-[2px] bg-[var(--color-line)] overflow-hidden">
                   <div
-                    className="h-full bg-[var(--color-accent)]/80 rounded-full"
+                    className="h-full bg-[var(--color-accent)]"
                     style={{ width: `${l.pct}%` }}
                   />
                 </div>
@@ -236,14 +236,10 @@ function Card({
 }) {
   return (
     <div
-      className={`glass rounded-xl overflow-hidden ${
+      className={`regmark glass rounded-lg ${
         hoverable ? "tile-hover" : ""
       } ${className}`}
     >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/15 to-transparent"
-      />
       {children}
     </div>
   );
@@ -251,7 +247,7 @@ function Card({
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <div className="text-[0.62rem] uppercase tracking-[0.18em] text-[var(--color-muted)] font-mono flex items-center gap-1.5">
+    <div className="annotation flex items-center gap-1.5">
       {children}
     </div>
   );

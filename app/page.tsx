@@ -121,7 +121,7 @@ function TopBar() {
           </Link>
           <a
             href={`mailto:${social.email}`}
-            className="text-[0.86rem] text-[var(--color-bg)] bg-[var(--color-accent)] hover:bg-[#7db8ff] px-3 py-1.5 rounded-md font-medium transition ml-1"
+            className="text-[0.86rem] text-[#05070b] bg-[var(--color-accent)] hover:bg-[var(--color-accent-soft)] px-3 py-1.5 rounded-[6px] font-medium transition ml-1"
           >
             Get in touch →
           </a>
@@ -134,23 +134,6 @@ function TopBar() {
 function Hero() {
   return (
     <section id="cover" className="relative pt-12 pb-20 md:pt-16 md:pb-24">
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 pointer-events-none"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 55% at 50% 30%, rgba(96,165,250,0.18) 0%, rgba(96,165,250,0.06) 35%, transparent 65%)",
-        }}
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 pointer-events-none opacity-[0.025]"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>\")",
-        }}
-      />
-
       <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-x-10 gap-y-10 items-start">
         <div>
           <div className="eyebrow fade-in">
@@ -161,10 +144,10 @@ function Hero() {
             graduating dec 2026 · looking for new-grad roles
           </div>
 
-          <h1 className="serif text-[2.6rem] md:text-[3.4rem] leading-[1.04] tracking-[-0.022em] text-[var(--color-fg)] mt-6 fade-in d-1 font-semibold lowercase">
+          <h1 className="serif text-[3.2rem] md:text-[4.4rem] leading-[1.02] tracking-[-0.022em] text-[var(--color-fg)] mt-6 fade-in d-1 lowercase">
             hi, i&apos;m parth.
             <br />
-            <span className="bg-clip-text text-transparent bg-gradient-to-br from-[#7db8ff] via-[#60a5fa] to-[#3b82f6]">
+            <span className="text-[var(--color-accent)]">
               i build small things and try to break them.
             </span>
           </h1>
@@ -206,9 +189,11 @@ function Hero() {
         </div>
       </div>
 
-      <div className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 fade-in d-4">
-        {numbers.map((n) => (
-          <div key={n.label}>
+      <div className="ticks h-2 mb-6 mt-16 md:mt-20 fade-in d-4" aria-hidden />
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 fade-in d-4">
+        {numbers.map((n, i) => (
+          <div key={n.label} className="border-t border-[var(--color-line)] pt-3">
+            <div className="annotation mb-2">{`M-${String(i + 1).padStart(2, "0")}`}</div>
             <NumberTicker value={n.value} className="numeral" />
             <div className="text-[0.86rem] mt-2.5 text-[var(--color-fg)]">
               {n.label}
@@ -248,11 +233,11 @@ function Work() {
             <article
               key={p.name}
               id={`card-${p.artifact}`}
-              className="fade-in glass rounded-2xl p-6 md:p-8 tile-hover"
+              className="fade-in regmark glass rounded-lg p-6 md:p-8 tile-hover"
             >
               <header className="flex items-start justify-between gap-4 flex-wrap mb-4">
                 <div className="flex items-baseline gap-3 text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] font-mono">
-                  <span className="text-[var(--color-accent)] tabular-nums">
+                  <span className="annotation tabular-nums">
                     No. {p.index}
                   </span>
                   <span className="w-5 h-px bg-[var(--color-line)]" />
@@ -267,7 +252,7 @@ function Work() {
               </header>
 
               <div className="grid md:grid-cols-[1fr_auto] gap-x-6 gap-y-3 items-baseline">
-                <h3 className="serif text-[2rem] md:text-[2.4rem] leading-[1.04] tracking-[-0.022em] text-[var(--color-fg)] font-semibold">
+                <h3 className="serif text-[2.2rem] md:text-[2.6rem] leading-[1.04] tracking-[-0.022em] text-[var(--color-fg)]">
                   <Link
                     href={`/work/${p.artifact}`}
                     className="hover:text-[var(--color-accent)] transition"
@@ -314,7 +299,7 @@ function Work() {
               {WRITEUP[p.artifact] && (
                 <Link
                   href={WRITEUP[p.artifact].href}
-                  className="mt-5 group flex items-center justify-between gap-4 rounded-xl border border-[var(--color-line)] hover:border-[var(--color-accent)]/50 hover:bg-[rgba(96,165,250,0.04)] px-5 py-4 transition"
+                  className="mt-5 group flex items-center justify-between gap-4 rounded-lg border border-[var(--color-line)] hover:border-[var(--color-accent)]/50 hover:bg-[rgba(96,165,250,0.04)] px-5 py-4 transition"
                 >
                   <div className="min-w-0">
                     <div className="text-[0.66rem] uppercase tracking-[0.18em] text-[var(--color-muted)] mb-0.5 flex items-center gap-2 font-mono">
@@ -457,7 +442,7 @@ function About() {
             </div>
             <ul className="space-y-2.5 text-[0.94rem] leading-snug">
               <li className="flex items-start gap-2.5">
-                <span className="text-[var(--color-accent)] mt-[3px]">○</span>
+                <span className="text-[var(--color-amber)] mt-[3px]">○</span>
                 <span>
                   <span className="text-[var(--color-fg)]">GPU stuff.</span>{" "}
                   <span className="text-[var(--color-fg-soft)]">
@@ -468,7 +453,7 @@ function About() {
                 </span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-[var(--color-accent)] mt-[3px]">○</span>
+                <span className="text-[var(--color-amber)] mt-[3px]">○</span>
                 <span>
                   <span className="text-[var(--color-fg)]">distributed systems at real scale.</span>{" "}
                   <span className="text-[var(--color-fg-soft)]">
@@ -479,7 +464,7 @@ function About() {
                 </span>
               </li>
               <li className="flex items-start gap-2.5">
-                <span className="text-[var(--color-accent)] mt-[3px]">○</span>
+                <span className="text-[var(--color-amber)] mt-[3px]">○</span>
                 <span>
                   <span className="text-[var(--color-fg)]">prod observability.</span>{" "}
                   <span className="text-[var(--color-fg-soft)]">
@@ -495,7 +480,7 @@ function About() {
         <aside className="md:border-l md:border-[var(--color-line)] md:pl-5 space-y-4 text-[0.86rem]">
           {skills.map((s) => (
             <div key={s.group}>
-              <div className="text-[0.66rem] uppercase tracking-[0.18em] text-[var(--color-muted)] mb-1.5 font-mono">
+              <div className="annotation mb-1.5">
                 {s.group}
               </div>
               <div className="text-[var(--color-fg-soft)] leading-[1.55]">
@@ -513,19 +498,11 @@ function Contact() {
   return (
     <section
       id="contact"
-      className="relative my-20 rounded-2xl glass p-9 md:p-12 overflow-hidden"
+      className="regmark relative my-20 rounded-lg glass p-9 md:p-12"
     >
-      <div
-        aria-hidden
-        className="absolute -top-24 -right-24 w-72 h-72 rounded-full pointer-events-none"
-        style={{
-          background: "rgba(96,165,250,0.20)",
-          filter: "blur(60px)",
-        }}
-      />
       <div className="relative">
       <SectionLabel n="04" title="say hi" />
-      <h2 className="serif text-[2.1rem] md:text-[2.8rem] leading-[1.05] tracking-[-0.022em] text-[var(--color-fg)] font-semibold mt-7 max-w-[22ch] lowercase">
+      <h2 className="serif text-[2.4rem] md:text-[3.2rem] leading-[1.05] tracking-[-0.022em] text-[var(--color-fg)] mt-7 max-w-[22ch] lowercase">
         building something where systems and ML meet?{" "}
         <span className="text-[var(--color-accent)]">let&apos;s talk.</span>
       </h2>
@@ -614,13 +591,12 @@ function Footer() {
 function SectionLabel({ n, title }: { n: string; title: string }) {
   return (
     <div className="flex items-baseline gap-4">
-      <span className="text-[0.78rem] tabular-nums text-[var(--color-accent)] font-mono">
-        {n}.
-      </span>
-      <h2 className="serif text-[1.55rem] md:text-[1.75rem] text-[var(--color-fg)] tracking-[-0.012em] font-medium">
+      <span className="annotation">{n}</span>
+      <h2 className="serif text-[1.8rem] md:text-[2rem] text-[var(--color-fg)] tracking-[-0.012em]">
         {title}
       </h2>
       <span className="flex-1 h-px bg-[var(--color-line)] translate-y-[-3px]" />
+      <span className="ticks h-2 w-[56px] shrink-0 self-center hidden md:block" aria-hidden />
     </div>
   );
 }

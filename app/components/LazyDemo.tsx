@@ -46,7 +46,7 @@ export default function LazyDemo({
       ) : (
         <div
           aria-hidden
-          className="rounded-[14px] border border-[var(--color-line)] bg-gradient-to-b from-[#131418] to-[#0d0d10] flex items-center justify-center"
+          className="rounded-lg border border-[var(--color-line)] bg-[var(--color-bg-soft)] flex items-center justify-center"
           style={{ minHeight: height }}
         >
           <span className="mono text-[0.74rem] text-[var(--color-muted)] uppercase tracking-[0.2em] flex items-center gap-2">

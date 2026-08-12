@@ -62,14 +62,14 @@ export default function WritingIndex() {
             <li key={p.slug}>
               <Link
                 href={p.href}
-                className="group block py-7 border-b border-[var(--color-line)]"
+                className="regmark group block py-7 border-b border-[var(--color-line)]"
               >
-                <div className="flex items-baseline gap-3 text-[0.7rem] uppercase tracking-[0.18em] text-[var(--color-muted)] mb-2 font-mono">
+                <div className="annotation flex items-baseline gap-3 mb-2">
                   <span className="tabular-nums">{fmtDate(p.date)}</span>
                   <span className="w-5 h-px bg-[var(--color-line)]" />
                   <span>{p.minutes} min read</span>
                 </div>
-                <h2 className="serif text-[1.6rem] md:text-[1.9rem] leading-[1.1] tracking-[-0.018em] font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)] transition">
+                <h2 className="serif text-[1.85rem] md:text-[2.2rem] leading-[1.1] tracking-[-0.018em] font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)] transition">
                   {p.title}
                 </h2>
                 <p className="text-[0.98rem] leading-[1.7] text-[var(--color-fg-soft)] mt-3 max-w-[60ch]">

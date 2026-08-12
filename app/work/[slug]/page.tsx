@@ -108,7 +108,7 @@ export default async function ProjectPage(props: {
 
         <header>
           <div className="flex items-center gap-3 text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] mb-4">
-            <span className="text-[var(--color-accent)] tabular-nums">
+            <span className="annotation tabular-nums">
               No. {project.index}
             </span>
             <span className="w-6 h-px bg-[var(--color-line)]" />
@@ -116,7 +116,7 @@ export default async function ProjectPage(props: {
             <span className="ml-auto tabular-nums">{project.year}</span>
           </div>
 
-          <h1 className="serif text-[3rem] md:text-[4rem] leading-[1] tracking-[-0.025em] font-semibold text-[var(--color-fg)]">
+          <h1 className="serif text-[3.4rem] md:text-[4.6rem] leading-[1] tracking-[-0.025em] font-semibold text-[var(--color-fg)]">
             {project.name}
           </h1>
           <p className="text-[1.15rem] text-[var(--color-fg-soft)] italic mt-3 leading-snug max-w-[58ch]">
@@ -176,16 +176,21 @@ export default async function ProjectPage(props: {
           <p className="text-[0.94rem] text-[var(--color-muted)] mb-4 max-w-[60ch]">
             Live in your browser — not a screenshot.
           </p>
-          <Demo />
+          <div className="regmark">
+            <Demo />
+          </div>
         </Section>
 
         <Section eyebrow="04 · Benchmarks">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-y-7 gap-x-6 mb-7">
-            {deep.benchmarks.map((b) => (
+            {deep.benchmarks.map((b, i) => (
               <div
                 key={b.label}
                 className="border-l border-[var(--color-line)] pl-4"
               >
+                <div className="annotation mb-1.5">
+                  B-{String(i + 1).padStart(2, "0")}
+                </div>
                 <NumberTicker
                   value={b.label}
                   className="numeral !text-[1.8rem] md:!text-[2rem] text-[var(--color-accent)]"
@@ -199,6 +204,7 @@ export default async function ProjectPage(props: {
               </div>
             ))}
           </div>
+          <div className="annotation mb-2">METHOD</div>
           <p className="text-[0.94rem] leading-[1.7] text-[var(--color-fg-soft)] max-w-[64ch] italic">
             {deep.benchmarkMethod}
           </p>
@@ -246,10 +252,10 @@ export default async function ProjectPage(props: {
           <Section eyebrow="Further reading">
             <Link
               href={writeup.href}
-              className="group flex items-center justify-between gap-4 rounded-xl border border-[var(--color-line)] bg-[var(--color-bg-soft)]/55 hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/5 px-5 py-4 transition"
+              className="regmark group flex items-center justify-between gap-4 rounded-lg border border-[var(--color-line)] bg-[var(--color-bg-soft)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/5 px-5 py-4 transition"
             >
               <div className="min-w-0">
-                <div className="text-[0.66rem] uppercase tracking-[0.18em] text-[var(--color-muted)] mb-0.5">
+                <div className="text-[0.66rem] uppercase tracking-[0.18em] text-[var(--color-muted)] mb-0.5 font-mono">
                   Writeup · {writeup.minutes} min read
                 </div>
                 <div className="text-[1rem] text-[var(--color-fg)] group-hover:text-[var(--color-accent)] transition">
@@ -269,10 +275,10 @@ export default async function ProjectPage(props: {
               <Link
                 key={p.artifact}
                 href={`/work/${p.artifact}`}
-                className="group rounded-xl border border-[var(--color-line)] bg-[var(--color-bg-soft)]/55 hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/5 px-4 py-4 transition"
+                className="regmark group rounded-lg border border-[var(--color-line)] bg-[var(--color-bg-soft)] hover:border-[var(--color-accent)] hover:bg-[var(--color-accent)]/5 px-4 py-4 transition"
               >
-                <div className="text-[0.66rem] uppercase tracking-[0.18em] text-[var(--color-muted)] mb-1">
-                  No. {p.index} · {p.year}
+                <div className="text-[0.66rem] uppercase tracking-[0.18em] text-[var(--color-muted)] mb-1 font-mono">
+                  <span className="annotation">No. {p.index}</span> · {p.year}
                 </div>
                 <div className="serif text-[1.1rem] font-medium text-[var(--color-fg)] group-hover:text-[var(--color-accent)] transition">
                   {p.name}
@@ -342,11 +348,22 @@ function Section({
   id?: string;
   children: React.ReactNode;
 }) {
+  const m = eyebrow.match(/^(\d+)\s·\s(.+)$/);
+  const index = m ? m[1] : null;
+  const label = m ? m[2] : eyebrow;
   return (
     <section id={id} className="py-10 border-t border-[var(--color-line)]">
-      <div className="text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)] mb-5 font-mono">
-        {eyebrow}
+      <div className="flex items-center gap-3 mb-1.5">
+        {index && <span className="annotation">{index}</span>}
+        <span className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-[var(--color-muted)]">
+          {label}
+        </span>
+        <span
+          className="flex-1 h-px bg-[var(--color-line)]"
+          aria-hidden
+        />
       </div>
+      <div className="ticks h-2 w-full mb-5" aria-hidden />
       {children}
     </section>
   );
