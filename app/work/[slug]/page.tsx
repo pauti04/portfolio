@@ -16,6 +16,7 @@ import CodeBlock, {
   BOURSE_SNIPPET,
   NETPULSE_SNIPPET,
 } from "@/app/components/CodeBlock";
+import NumberTicker from "@/app/components/NumberTicker";
 
 const DEMOS: Record<string, React.ComponentType> = {
   reflight: ReflightDemo,
@@ -185,9 +186,10 @@ export default async function ProjectPage(props: {
                 key={b.label}
                 className="border-l border-[var(--color-line)] pl-4"
               >
-                <div className="numeral !text-[1.8rem] md:!text-[2rem] text-[var(--color-accent)]">
-                  {b.label}
-                </div>
+                <NumberTicker
+                  value={b.label}
+                  className="numeral !text-[1.8rem] md:!text-[2rem] text-[var(--color-accent)]"
+                />
                 <div className="text-[0.86rem] mt-2 text-[var(--color-fg)]">
                   {b.value}
                 </div>

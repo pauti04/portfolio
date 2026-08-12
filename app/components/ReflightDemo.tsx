@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 type Mode = "replay" | "diff" | "promote";
 type RunState = "idle" | "running" | "done";
@@ -36,6 +36,13 @@ export default function ReflightDemo() {
   const [state, setState] = useState<RunState>("idle");
   const [visible, setVisible] = useState(0);
 
+  const rootRef = useRef<HTMLDivElement>(null);
+  const mountedRef = useRef(true);
+  const userTouchedRef = useRef(false);
+  const autoFiredRef = useRef(false);
+  const stateRef = useRef<RunState>(state);
+  const runRef = useRef<() => void>(() => {});
+
   const rows =
     mode === "replay" ? EVENTS.length : mode === "diff" ? DIFF.length : PROMOTE_YAML.length;
 
@@ -44,12 +51,58 @@ export default function ReflightDemo() {
     setVisible(0);
     for (let i = 0; i < rows; i++) {
       await new Promise((r) => setTimeout(r, mode === "promote" ? 180 : 420));
+      if (!mountedRef.current) return;
       setVisible(i + 1);
     }
+    if (!mountedRef.current) return;
     setState("done");
   };
 
+  useEffect(() => {
+    stateRef.current = state;
+    runRef.current = run;
+  });
+
+  useEffect(() => {
+    mountedRef.current = true;
+    return () => {
+      mountedRef.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    const el = rootRef.current;
+    if (!el || autoFiredRef.current) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let timer: ReturnType<typeof setTimeout> | undefined;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.intersectionRatio < 0.4) continue;
+          io.disconnect();
+          if (autoFiredRef.current || userTouchedRef.current || stateRef.current !== "idle") {
+            return;
+          }
+          autoFiredRef.current = true;
+          timer = setTimeout(() => {
+            if (mountedRef.current && !userTouchedRef.current && stateRef.current === "idle") {
+              runRef.current();
+            }
+          }, 500);
+          return;
+        }
+      },
+      { threshold: 0.4 }
+    );
+    io.observe(el);
+    return () => {
+      io.disconnect();
+      if (timer !== undefined) clearTimeout(timer);
+    };
+  }, []);
+
   const pick = (m: Mode) => {
+    userTouchedRef.current = true;
     setMode(m);
     setState("idle");
     setVisible(0);
@@ -63,7 +116,7 @@ export default function ReflightDemo() {
       : "reflight promote support-run-19";
 
   return (
-    <div className="artifact !p-0 overflow-hidden" style={{ fontSize: "0.7rem" }}>
+    <div ref={rootRef} className="artifact !p-0 overflow-hidden" style={{ fontSize: "0.7rem" }}>
       <header className="flex items-center justify-between px-3 py-2 border-b border-[var(--color-line)] flex-wrap gap-2">
         <div className="flex items-center gap-3">
           <span className="c-accent">⏺</span>
@@ -94,7 +147,10 @@ export default function ReflightDemo() {
           <span className="c-fg">{cmd}</span>
         </span>
         <button
-          onClick={run}
+          onClick={() => {
+            userTouchedRef.current = true;
+            run();
+          }}
           disabled={state === "running"}
           className="mono text-[0.62rem] uppercase tracking-[0.14em] px-2 py-0.5 rounded-[3px] border border-[var(--color-accent)] text-[var(--color-accent)] hover:bg-[var(--color-accent)]/10 disabled:opacity-40 transition ml-auto"
         >

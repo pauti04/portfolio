@@ -18,6 +18,7 @@ import LazyDemo from "./components/LazyDemo";
 import GitHubStats from "./components/GitHubStats";
 import MarginNote from "./components/MarginNote";
 import HeroBento from "./components/HeroBento";
+import NumberTicker from "./components/NumberTicker";
 
 const DEMOS: Record<string, React.ComponentType> = {
   reflight: ReflightDemo,
@@ -208,7 +209,7 @@ function Hero() {
       <div className="mt-16 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 fade-in d-4">
         {numbers.map((n) => (
           <div key={n.label}>
-            <div className="numeral">{n.value}</div>
+            <NumberTicker value={n.value} className="numeral" />
             <div className="text-[0.86rem] mt-2.5 text-[var(--color-fg)]">
               {n.label}
             </div>

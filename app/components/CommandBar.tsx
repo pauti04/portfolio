@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
+import { projects } from "@/lib/data";
+import { POSTS } from "@/lib/writing";
 
 type ItemKind = "jump" | "project" | "action" | "external";
 
@@ -10,18 +12,18 @@ type Item = {
   title: string;
   subtitle?: string;
   group: string;
+  keepOpen?: boolean;
+  // Stable text for fuzzy matching when subtitle is transient UI state
+  // (e.g. "Copied ✓") — keeps the filtered list from reshuffling mid-feedback.
+  searchText?: string;
   exec: () => void;
 };
 
-const PROJECTS = [
-  { id: "reflight", title: "Reflight", sub: "Flight recorder for AI agents" },
-  { id: "netpulse", title: "NetPulse", sub: "Internet outage & BGP anomaly detector" },
-  { id: "bourse", title: "Bourse", sub: "Low-latency limit order book in Rust" },
-  { id: "costdna", title: "CostDNA", sub: "Behavioral GNN for AWS cost attribution" },
-  { id: "chaincheck", title: "ChainCheck", sub: "LLM hallucination detection toolkit" },
-  { id: "chaincheck-action", title: "ChainCheck Action", sub: "GitHub Action — AI-PR sanity checks" },
-  { id: "rasoibot", title: "RasoiBot", sub: "Conversational recipe assistant" },
-];
+const PROJECTS = projects.map((p) => ({
+  id: p.artifact,
+  title: p.name,
+  sub: p.tagline,
+}));
 
 const SECTIONS = [
   { id: "cover", title: "Cover" },
@@ -55,8 +57,16 @@ export default function CommandBar() {
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [cursor, setCursor] = useState(0);
+  const [copiedEmail, setCopiedEmail] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
   const listRef = useRef<HTMLUListElement>(null);
+  const copyTimer = useRef<number | null>(null);
+
+  useEffect(() => {
+    return () => {
+      if (copyTimer.current) window.clearTimeout(copyTimer.current);
+    };
+  }, []);
 
   const allItems: Item[] = useMemo(
     () => [
@@ -76,6 +86,22 @@ export default function CommandBar() {
         group: "Projects",
         exec: () => jumpTo(`card-${p.id}`),
       })),
+      ...projects.map<Item>((p) => ({
+        id: `d-${p.artifact}`,
+        kind: "external",
+        title: `${p.name} — deep dive`,
+        subtitle: "Architecture · benchmarks · lessons",
+        group: "Deep dives",
+        exec: () => (window.location.href = `/work/${p.artifact}`),
+      })),
+      ...POSTS.map<Item>((post) => ({
+        id: `w-${post.slug}`,
+        kind: "external",
+        title: post.title,
+        subtitle: `${post.minutes} min read`,
+        group: "Writing",
+        exec: () => (window.location.href = post.href),
+      })),
       {
         id: "a-email",
         kind: "action",
@@ -83,6 +109,25 @@ export default function CommandBar() {
         subtitle: "parth.auti@gmail.com",
         group: "Actions",
         exec: () => (window.location.href = "mailto:parth.auti@gmail.com"),
+      },
+      {
+        id: "a-copy-email",
+        kind: "action",
+        title: "Copy email",
+        subtitle: copiedEmail ? "Copied ✓" : "parth.auti@gmail.com",
+        group: "Actions",
+        keepOpen: true,
+        searchText: "parth.auti@gmail.com",
+        exec: () => {
+          navigator.clipboard.writeText("parth.auti@gmail.com").then(() => {
+            setCopiedEmail(true);
+            if (copyTimer.current) window.clearTimeout(copyTimer.current);
+            copyTimer.current = window.setTimeout(
+              () => setCopiedEmail(false),
+              1200
+            );
+          });
+        },
       },
       {
         id: "a-cv",
@@ -117,7 +162,7 @@ export default function CommandBar() {
         exec: () => window.scrollTo({ top: 0, behavior: "smooth" }),
       },
     ],
-    []
+    [copiedEmail]
   );
 
   const filtered = useMemo(() => {
@@ -127,7 +172,7 @@ export default function CommandBar() {
         it,
         score: Math.max(
           fuzzy(query, it.title),
-          fuzzy(query, it.subtitle || "") * 0.6
+          fuzzy(query, it.searchText ?? it.subtitle ?? "") * 0.6
         ),
       }))
       .filter((r) => r.score > 0)
@@ -195,7 +240,7 @@ export default function CommandBar() {
       const it = filtered[cursor];
       if (it) {
         it.exec();
-        setOpen(false);
+        if (!it.keepOpen) setOpen(false);
       }
     }
   };
@@ -256,7 +301,7 @@ export default function CommandBar() {
                               <button
                                 onClick={() => {
                                   it.exec();
-                                  setOpen(false);
+                                  if (!it.keepOpen) setOpen(false);
                                 }}
                                 onMouseEnter={() => setCursor(idx)}
                                 className={`w-full flex items-center gap-3 px-5 py-2.5 text-left transition ${

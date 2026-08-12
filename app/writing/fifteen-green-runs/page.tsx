@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import ReadingProgress from "@/app/components/ReadingProgress";
 
 export const metadata: Metadata = {
   title: "Fifteen green runs booked a meeting on a Sunday",
@@ -10,6 +11,7 @@ export const metadata: Metadata = {
 export default function Post() {
   return (
     <main className="min-h-screen">
+      <ReadingProgress />
       <div className="mx-auto max-w-[720px] px-6 pt-24 pb-24">
         <nav className="text-[0.82rem] text-[var(--color-muted)] mb-10">
           <Link href="/" className="hover:text-[var(--color-accent)] transition">
