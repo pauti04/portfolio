@@ -14,9 +14,18 @@ export default function CursorHUD() {
   useEffect(() => {
     const fine = window.matchMedia("(pointer: fine) and (min-width: 768px)");
     const still = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (!fine.matches || still.matches) return;
-    setOn(true);
+    const sync = () => setOn(fine.matches && !still.matches);
+    sync();
+    fine.addEventListener("change", sync);
+    still.addEventListener("change", sync);
+    return () => {
+      fine.removeEventListener("change", sync);
+      still.removeEventListener("change", sync);
+    };
+  }, []);
 
+  useEffect(() => {
+    if (!on) return;
     let mx = 0, my = 0;
     const paint = () => {
       raf.current = 0;
@@ -30,12 +39,14 @@ export default function CursorHUD() {
     const onMove = (e: MouseEvent) => { mx = e.clientX; my = e.clientY; queue(); };
     window.addEventListener("mousemove", onMove, { passive: true });
     window.addEventListener("scroll", queue, { passive: true });
+    queue();
     return () => {
       window.removeEventListener("mousemove", onMove);
       window.removeEventListener("scroll", queue);
       cancelAnimationFrame(raf.current);
+      raf.current = 0;
     };
-  }, []);
+  }, [on]);
 
   if (!on) return null;
 

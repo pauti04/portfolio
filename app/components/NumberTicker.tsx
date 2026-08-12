@@ -20,31 +20,40 @@ export default function NumberTicker({
   const decimals = numeric.includes(".") ? numeric.split(".")[1].length : 0;
 
   const ref = useRef<HTMLDivElement>(null);
+  const animRef = useRef(0);
   // Start at the final value so no-JS, reduced-motion, and hydration all
-  // show the real number; the observer rewinds to 0 and animates up once.
+  // show the real number; animations rewind to 0 and count up.
   const [display, setDisplay] = useState(numeric);
+
+  const motionOk = () =>
+    typeof window !== "undefined" &&
+    !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const runAnim = () => {
+    if (animRef.current || !numeric) return;
+    const start = performance.now();
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / DURATION, 1);
+      const eased = 1 - Math.pow(1 - t, 3);
+      setDisplay((target * eased).toFixed(decimals));
+      animRef.current = t < 1 ? requestAnimationFrame(tick) : 0;
+    };
+    setDisplay((0).toFixed(decimals));
+    animRef.current = requestAnimationFrame(tick);
+  };
 
   useEffect(() => {
     if (!numeric) return;
     const el = ref.current;
     if (!el) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (!motionOk()) return;
 
-    let raf = 0;
     const io = new IntersectionObserver(
       (entries) => {
         for (const e of entries) {
           if (!e.isIntersecting || e.intersectionRatio < 0.5) continue;
           io.disconnect();
-          const start = performance.now();
-          const tick = (now: number) => {
-            const t = Math.min((now - start) / DURATION, 1);
-            const eased = 1 - Math.pow(1 - t, 3);
-            setDisplay((target * eased).toFixed(decimals));
-            if (t < 1) raf = requestAnimationFrame(tick);
-          };
-          setDisplay((0).toFixed(decimals));
-          raf = requestAnimationFrame(tick);
+          runAnim();
           return;
         }
       },
@@ -53,8 +62,10 @@ export default function NumberTicker({
     io.observe(el);
     return () => {
       io.disconnect();
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(animRef.current);
+      animRef.current = 0;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [numeric, target, decimals]);
 
   if (!numeric) {
@@ -62,7 +73,11 @@ export default function NumberTicker({
   }
 
   return (
-    <div ref={ref} className={className}>
+    <div
+      ref={ref}
+      className={className}
+      onMouseEnter={() => motionOk() && runAnim()}
+    >
       {prefix}
       <span style={{ fontVariantNumeric: "tabular-nums" }}>{display}</span>
       {suffix}
