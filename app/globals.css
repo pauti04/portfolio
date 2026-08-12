@@ -140,6 +140,12 @@ html { scroll-behavior: smooth; }
   margin: 0;
 }
 
+@keyframes ticks-drift {
+  from { background-position-x: 0, 0; }
+  to   { background-position-x: 40px, 40px; }
+}
+.ticks { animation: ticks-drift 14s linear infinite; }
+
 @keyframes blink {
   0%, 49% { opacity: 1; }
   50%, 100% { opacity: 0; }

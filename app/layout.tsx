@@ -3,6 +3,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
 import Spotlight from "./components/Spotlight";
 import ScrollReveal from "./components/ScrollReveal";
+import CursorHUD from "./components/CursorHUD";
 import "./globals.css";
 
 // pauti04.dev lapsed (Aug 2026) — flip back once the domain is re-registered
@@ -93,6 +94,7 @@ export default function RootLayout({
         {children}
         <Spotlight />
         <ScrollReveal />
+        <CursorHUD />
         <SpeedInsights />
         <Analytics />
       </body>
