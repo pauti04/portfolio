@@ -35,6 +35,7 @@ const WRITEUP: Record<string, { title: string; href: string; minutes: number }> 
       const project = p.tags.find((t) => /^[A-Z]/.test(t))?.toLowerCase();
       if (!project) return [];
       const map: Record<string, string> = {
+        reflight: "reflight",
         netpulse: "netpulse",
         bourse: "bourse",
         costdna: "costdna",
