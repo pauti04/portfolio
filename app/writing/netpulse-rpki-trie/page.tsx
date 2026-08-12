@@ -251,8 +251,8 @@ export default function Post() {
           </Link>
           <span>
             More writeups soon. Reach me at{" "}
-            <a href="mailto:nikunjbhadwa123@gmail.com" className="link">
-              nikunjbhadwa123@gmail.com
+            <a href="mailto:parth.auti@gmail.com" className="link">
+              parth.auti@gmail.com
             </a>
           </span>
         </footer>

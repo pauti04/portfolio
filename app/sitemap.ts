@@ -2,7 +2,8 @@ import type { MetadataRoute } from "next";
 import { projects } from "@/lib/data";
 import { POSTS } from "@/lib/writing";
 
-const BASE = "https://pauti04.dev";
+// pauti04.dev lapsed (Aug 2026) — flip back once re-registered.
+const BASE = "https://portfolio-chi-ten-5nrzbypp16.vercel.app";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();

@@ -1,8 +1,9 @@
 import { byNewest } from "@/lib/writing";
 
-const SITE_URL = "https://pauti04.dev";
+// pauti04.dev lapsed (Aug 2026) — flip back once re-registered.
+const SITE_URL = "https://portfolio-chi-ten-5nrzbypp16.vercel.app";
 const AUTHOR = "Parth (pauti04)";
-const EMAIL = "nikunjbhadwa123@gmail.com";
+const EMAIL = "parth.auti@gmail.com";
 
 function esc(s: string) {
   return s

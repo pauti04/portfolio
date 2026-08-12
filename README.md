@@ -1,12 +1,14 @@
-# pauti04.dev — portfolio
+# portfolio
 
-Source for the portfolio at <https://pauti04.dev>.
+Source for the portfolio, live at
+<https://portfolio-chi-ten-5nrzbypp16.vercel.app>
+(canonical domain pauti04.dev pending re-registration).
 
-Six live demos in-browser (BGP detector, Rust matching engine,
-behavioural GNN for cloud cost, hallucination detector ensemble,
-GitHub Action variant, recipe assistant), real GitHub stats, two
-writeups, a printable CV, and a `⌘K` command palette over the
-whole thing.
+Seven live demos in-browser (AI-agent flight recorder, BGP detector,
+Rust matching engine, behavioural GNN for cloud cost, hallucination
+detector ensemble, GitHub Action variant, recipe assistant), real
+GitHub stats, two writeups, a printable CV, and a `⌘K` command
+palette over the whole thing.
 
 ## Stack
 
@@ -41,7 +43,7 @@ plus an RSS feed at `/feed.xml`.
 
 | Path | What |
 | --- | --- |
-| `/` | Single-page portfolio with all 6 demos |
+| `/` | Single-page portfolio with all 7 demos |
 | `/work/[slug]` | Deep dive per project (architecture, benchmarks, lessons) |
 | `/writing` | Index of writeups |
 | `/writing/[slug]` | Individual writeup |

@@ -5,7 +5,9 @@ import Spotlight from "./components/Spotlight";
 import ScrollReveal from "./components/ScrollReveal";
 import "./globals.css";
 
-const SITE_URL = "https://pauti04.dev";
+// pauti04.dev lapsed (Aug 2026) — flip back once the domain is re-registered
+// and re-attached in Vercel.
+const SITE_URL = "https://portfolio-chi-ten-5nrzbypp16.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -14,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s — Parth · pauti04",
   },
   description:
-    "Student engineer building low-latency systems, BGP anomaly detection, GNNs for cloud cost, and LLM tooling. Six live demos, real benchmarks. Open to 2026 SWE / ML-infra roles.",
+    "Student engineer building agent reliability tooling, low-latency systems, BGP anomaly detection, and GNNs for cloud cost. Seven live demos, real benchmarks. Graduating Dec 2026 — open to new-grad SWE / ML-infra roles.",
   applicationName: "Parth · pauti04",
   authors: [{ name: "Parth", url: "https://github.com/pauti04" }],
   creator: "Parth",
@@ -49,13 +51,13 @@ export const metadata: Metadata = {
     url: SITE_URL,
     title: "Parth — Systems and ML, measured.",
     description:
-      "Live demos with real benchmarks: 220k/s matching engine, BGP anomaly detector, GraphSAGE for cloud cost. Open to 2026 SWE / ML-infra roles.",
+      "Live demos with real benchmarks: a flight recorder for AI agents, 220k/s matching engine, BGP anomaly detector, GraphSAGE for cloud cost. Graduating Dec 2026 — open to new-grad SWE / ML-infra roles.",
   },
   twitter: {
     card: "summary_large_image",
     title: "Parth — Systems and ML, measured.",
     description:
-      "Six live demos, real benchmarks. Open to 2026 SWE / ML-infra roles.",
+      "Seven live demos, real benchmarks. Graduating Dec 2026 — open to new-grad SWE / ML-infra roles.",
   },
 };
 
