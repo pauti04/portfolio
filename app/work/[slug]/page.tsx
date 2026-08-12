@@ -5,6 +5,7 @@ import { projects, social } from "@/lib/data";
 import { PROJECT_PAGES } from "@/lib/project-pages";
 import { POSTS } from "@/lib/writing";
 
+import ReflightDemo from "@/app/components/ReflightDemo";
 import BourseDemo from "@/app/components/BourseDemo";
 import NetPulseDemo from "@/app/components/NetPulseDemo";
 import ChainCheckDemo from "@/app/components/ChainCheckDemo";
@@ -17,6 +18,7 @@ import CodeBlock, {
 } from "@/app/components/CodeBlock";
 
 const DEMOS: Record<string, React.ComponentType> = {
+  reflight: ReflightDemo,
   netpulse: NetPulseDemo,
   bourse: BourseDemo,
   costdna: CostDNADemo,

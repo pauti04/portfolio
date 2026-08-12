@@ -12,6 +12,45 @@ export type ProjectPage = {
 };
 
 export const PROJECT_PAGES: Record<string, ProjectPage> = {
+  reflight: {
+    slug: "reflight",
+    artifact: "reflight",
+    whyExists: [
+      "Agents are programs whose most important steps are non-deterministic and external. When one fails, the failure evaporates — re-running gives you a different run. Every other tool in the space observes or evaluates; I wanted the missing primitive underneath all of them: make the run itself reproducible.",
+      "Reflight records every LLM call, tool call, token and dollar an agent spends — three added lines of code — into an open, documented format. From a recording you can replay the run byte-identically offline (~7 ms, $0.00), diff two runs to the first divergence, classify the failure, fork mid-run to test a fix, and promote the failure into a pytest regression test with one command.",
+      "The pitch in one line: pytest-vcr lifted to the agent layer, plus everything downstream of reproducibility — regression suites built from real failures, CI gates on reliability, cost governors with hard budgets. It composes with LangSmith/Langfuse via OpenTelemetry export instead of competing with them.",
+    ],
+    architecture:
+      "A recording session wraps your model client and your tools; every request/response pair lands in an append-only events.jsonl. Replay re-executes your actual agent code with all external I/O served from the recording, verifying at each step that the code makes the same requests it made before — a changed prompt or tool raises ReplayDivergence instead of lying. Parallel tool calls replay in any completion order (matched by tool_use_id); clock/PRNG/uuid draws are pinned and served back. On top: a SQLite store, a FastAPI server, a Next.js timeline UI with run-diff, a rule-based failure classifier plus an LLM judge with ensemble voting, and a governor with hard cost caps and a loop circuit breaker. LangGraph/LangChain agents instrument without code changes.",
+    benchmarks: [
+      { label: "~7 ms", value: "Full-run replay", note: "Byte-identical, network off, $0.00. Verified against real dependent API calls." },
+      { label: "3 lines", value: "To instrument an agent", note: "Wrap the client, wrap the tools, end the session. Sync or asyncio." },
+      { label: "12/12", value: "Judge accuracy", note: "Failure classification vs seeded ground truth in the repo's eval." },
+      { label: "15/15", value: "Case-study catch rate", note: "Live gpt-4o-mini scheduling runs that passed every tool-level check yet booked a meeting on a Sunday — all caught by one 15-line promoted assertion." },
+    ],
+    benchmarkMethod:
+      "Replay timing is the repo's own example suite on a laptop — replay does no network I/O, so it's effectively bounded by JSON parsing. The 15/15 case study is documented in docs/case-study.md with the recordings included: the same failures swung an LLM judge's catch rate from 5/5 to 1/5 across prompt variants, which is the argument for cheap deterministic assertions over judge-only evals. 100+ tests run in CI.",
+    lessons: [
+      {
+        title: "Reproducibility is the substrate, not the feature.",
+        body: "Detectors, evals, and observability all get better when they run on recordings instead of live runs. The moment a failure is a file, everything downstream — diffing, classifying, regression testing — becomes ordinary engineering.",
+      },
+      {
+        title: "Honest limits beat magic claims.",
+        body: "Replay is deterministic for the recorded path; it is not time travel for arbitrary code changes. Saying that loudly (docs/limits.md) — and adding fork mode and live re-verification for the cases replay can't cover — built more trust than any benchmark.",
+      },
+      {
+        title: "LLM judges are flaky graders; recorded assertions aren't.",
+        body: "The case study's judge caught 5/5 failures with one prompt and 1/5 with a near-identical one. The 15-line YAML assertion caught 15/15 every time, for $0.00. Judges are for triage; promoted tests are for regression.",
+      },
+      {
+        title: "Flag what you can't see.",
+        body: "Network I/O that bypasses the session would make a recording silently un-replayable. flight_check marks the run unrecorded_io instead — a wrong answer loudly is recoverable, silently is not.",
+      },
+    ],
+    whatsNext:
+      "A recorded demo video and launch writeups are the immediate gap. After that: adapters beyond LangChain (the OpenAI Agents SDK is the obvious next), richer fork-mode workflows for testing fixes against a fleet of recorded failures, and growing the set of teams whose golden datasets are built from promoted production failures instead of hand-curated examples.",
+  },
   netpulse: {
     slug: "netpulse",
     artifact: "netpulse",

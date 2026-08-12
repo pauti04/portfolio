@@ -7,12 +7,24 @@ export type Project = {
   year: string;
   repo: string;
   demo?: string;
-  artifact: "netpulse" | "bourse" | "costdna" | "chaincheck" | "chaincheck-action" | "rasoibot";
+  artifact: "reflight" | "netpulse" | "bourse" | "costdna" | "chaincheck" | "chaincheck-action" | "rasoibot";
 };
 
 export const projects: Project[] = [
   {
     index: "01",
+    name: "Reflight",
+    tagline: "Flight recorder for AI agents",
+    blurb:
+      "Records every LLM call, tool call, token and dollar an agent spends — three added lines of code — then replays the run byte-identically offline in ~7 ms for $0.00. Diff two runs to the first divergence, classify failures, and promote any recorded failure into a pytest regression test with one command. Reliability infrastructure, not another eval.",
+    stack: "python · fastapi · sqlite · next.js · opentelemetry",
+    year: "2026",
+    repo: "https://github.com/pauti04/reflight",
+    demo: "https://pauti04.github.io/reflight-demo/",
+    artifact: "reflight",
+  },
+  {
+    index: "02",
     name: "Bourse",
     tagline: "Low-latency limit order book in Rust",
     blurb:
@@ -24,7 +36,7 @@ export const projects: Project[] = [
     artifact: "bourse",
   },
   {
-    index: "02",
+    index: "03",
     name: "CostDNA",
     tagline: "Behavioral GNN for AWS cost attribution",
     blurb:
@@ -36,7 +48,7 @@ export const projects: Project[] = [
     artifact: "costdna",
   },
   {
-    index: "03",
+    index: "04",
     name: "ChainCheck",
     tagline: "LLM hallucination detection toolkit",
     blurb:
@@ -47,7 +59,7 @@ export const projects: Project[] = [
     artifact: "chaincheck",
   },
   {
-    index: "04",
+    index: "05",
     name: "NetPulse",
     tagline: "Internet outage & BGP anomaly detector",
     blurb:
@@ -59,7 +71,7 @@ export const projects: Project[] = [
     artifact: "netpulse",
   },
   {
-    index: "05",
+    index: "06",
     name: "ChainCheck Action",
     tagline: "GitHub Action — AI-PR sanity checks",
     blurb:
@@ -70,7 +82,7 @@ export const projects: Project[] = [
     artifact: "chaincheck-action",
   },
   {
-    index: "06",
+    index: "07",
     name: "RasoiBot",
     tagline: "Conversational recipe assistant",
     blurb:
@@ -91,13 +103,13 @@ export const numbers = [
 ];
 
 export const skills = [
-  { group: "languages", items: "python · rust · typescript · javascript · sql · c" },
-  { group: "systems", items: "tokio · async rust · lock-free data structures · write-ahead logs · fastapi · duckdb · postgres · docker · fly.io · vercel · github actions" },
-  { group: "ml / data", items: "pytorch · graph neural networks (graphsage) · llm agents · function calling · rag · nli · hallucination detection · bgp / ripe ris" },
+  { group: "languages", items: "python · rust · typescript · go · c++ · sql · java" },
+  { group: "systems", items: "tokio · async rust · lock-free data structures · write-ahead logs · fastapi · duckdb · postgres · redis · docker · kubernetes · terraform · fly.io · vercel · github actions" },
+  { group: "ml / data", items: "pytorch · huggingface · graph neural networks (graphsage) · llm agents · deterministic replay · function calling · mcp · langchain · rag · nli · hallucination detection · bgp / ripe ris" },
   { group: "frontend", items: "next.js 15 · react 19 · tailwind v4 · server components" },
 ];
 
 export const social = {
   github: "https://github.com/pauti04",
-  email: "nikunjbhadwa123@gmail.com",
+  email: "parth.auti@gmail.com",
 };

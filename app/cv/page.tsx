@@ -59,12 +59,14 @@ export default function CVPage() {
         <Section title="Summary">
           <p className="text-[0.96rem] leading-[1.6]">
             Student engineer focused on production-grade systems and ML
-            infrastructure. Recent work spans an Internet-outage detector
-            calibrated against the RIPE RIS archive (500× speedup via
-            longest-prefix-match indexing), a Rust limit-order book matching
-            engine (~220k orders/sec, p99 ≈ 24 µs in browser), and a
-            behavioural GNN for AWS cost attribution. Open to new-grad SWE
-            and ML-infrastructure roles for 2026.
+            infrastructure. Recent work spans a flight recorder that makes
+            AI-agent runs deterministically replayable (byte-identical
+            replay, failures promoted to pytest regression tests), an
+            Internet-outage detector calibrated against the RIPE RIS archive
+            (500× speedup via longest-prefix-match indexing), a Rust
+            limit-order book matching engine, and a behavioural GNN for AWS
+            cost attribution. Graduating December 2026; open to new-grad SWE
+            and ML-infrastructure roles.
           </p>
         </Section>
 
@@ -229,12 +231,13 @@ export default function CVPage() {
 
         <Section title="Looking for">
           <ul className="space-y-1 text-[0.92rem] list-disc list-inside marker:text-[#888]">
-            <li>New-grad SWE / ML-infrastructure roles · 2026 start</li>
+            <li>New-grad SWE / ML-infrastructure roles · graduating Dec 2026</li>
             <li>Remote-first; open to relocation</li>
             <li>
-              Performance engineering, low-latency systems, GNNs, LLM tooling
+              Performance engineering, low-latency systems, agent reliability,
+              GNNs, LLM tooling
             </li>
-            <li>Available for technical interviews from June 2026</li>
+            <li>Interviewing now</li>
           </ul>
         </Section>
 

@@ -14,6 +14,7 @@ type Item = {
 };
 
 const PROJECTS = [
+  { id: "reflight", title: "Reflight", sub: "Flight recorder for AI agents" },
   { id: "netpulse", title: "NetPulse", sub: "Internet outage & BGP anomaly detector" },
   { id: "bourse", title: "Bourse", sub: "Low-latency limit order book in Rust" },
   { id: "costdna", title: "CostDNA", sub: "Behavioral GNN for AWS cost attribution" },
@@ -79,9 +80,9 @@ export default function CommandBar() {
         id: "a-email",
         kind: "action",
         title: "Email me",
-        subtitle: "nikunjbhadwa123@gmail.com",
+        subtitle: "parth.auti@gmail.com",
         group: "Actions",
-        exec: () => (window.location.href = "mailto:nikunjbhadwa123@gmail.com"),
+        exec: () => (window.location.href = "mailto:parth.auti@gmail.com"),
       },
       {
         id: "a-cv",

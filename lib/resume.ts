@@ -1,8 +1,8 @@
 // ----------------------------------------------------------------------------
 // Resume data
 // ----------------------------------------------------------------------------
-// Fill in your real values below. Any section left as an empty array (`[]`)
-// will simply not render — no placeholder text on the page.
+// Source of truth: ~/resume/resume-2/resume.tex (Jun 2026) + master resume.
+// Any section left as an empty array (`[]`) simply doesn't render.
 //
 // Used by:
 //   - app/cv/page.tsx  (Education / Experience / Awards sections)
@@ -37,76 +37,117 @@ export type Award = {
   href?: string;     // link to certificate / writeup
 };
 
-// ----------------------------------------------------------------------------
-// EDUCATION
-// ----------------------------------------------------------------------------
-//
-// Example (delete the // and fill in):
-//
-// export const education: Education[] = [
-//   {
-//     school: "Your University",
-//     degree: "B.S. in Computer Science",
-//     start: "2022-09",
-//     end: "Expected 2026-05",
-//     location: "City, State",
-//     gpa: "3.9 / 4.0",                    // omit if you prefer
-//     coursework: [
-//       "Operating Systems",
-//       "Distributed Systems",
-//       "Machine Learning",
-//       "Algorithms",
-//       "Computer Networks",
-//     ],
-//     honors: "Dean's List · 4 semesters",  // omit if none
-//   },
-// ];
-//
-export const education: Education[] = [];
+export const education: Education[] = [
+  {
+    school: "University of North Carolina at Charlotte",
+    degree: "B.S. in Computer Science",
+    start: "2025-08",
+    end: "Expected Dec 2026",
+    location: "Charlotte, NC",
+    gpa: "3.7 / 4.0",
+    coursework: [
+      "Machine Learning",
+      "Deep Learning",
+      "Data Mining",
+      "Operating Systems",
+      "Computer Networks",
+      "Database Systems",
+      "Cloud Computing",
+      "Data Structures & Algorithms",
+    ],
+    honors: "Chancellor's List (Spring 2026) · Dean's List (Fall 2025)",
+  },
+  {
+    school: "Manipal Academy of Higher Education (MAHE)",
+    degree: "Computer Science (transferred to UNC Charlotte)",
+    start: "2023-08",
+    end: "2025-05",
+    location: "Manipal, India",
+    gpa: "3.63 / 4.0",
+  },
+];
 
-// ----------------------------------------------------------------------------
-// EXPERIENCE
-// ----------------------------------------------------------------------------
-//
-// Example:
-//
-// export const experience: Experience[] = [
-//   {
-//     company: "Company name",
-//     role: "Software Engineering Intern",
-//     start: "2025-06",
-//     end: "2025-08",
-//     location: "Remote / City, State",
-//     href: "https://company.com",
-//     bullets: [
-//       "Cut p99 latency on the X service from 320ms to 84ms by replacing Y with Z.",
-//       "Shipped <feature> used by N teams across the company.",
-//       "Wrote a runbook now used by on-call.",
-//     ],
-//   },
-// ];
-//
-export const experience: Experience[] = [];
+export const experience: Experience[] = [
+  {
+    company: "Charlotte Machine Learning Lab (CharmLab)",
+    role: "Undergraduate Researcher",
+    start: "2026-05",
+    end: "Present",
+    location: "UNC Charlotte — advised by Prof. Minwoo Lee",
+    bullets: [
+      "Extending ChainCheck's NLI/judge ensemble to study LLM judge reliability under framing bias and reference-knowledge conflicts as per-claim failure modes.",
+      "Designing experiments to test whether NLI/judge disagreement predicts framing-bias failures on HaluEval-QA (n=500).",
+    ],
+  },
+  {
+    company: "Starbucks",
+    role: "Barista → Barista Trainer (promoted)",
+    start: "2025-10",
+    end: "2026-04",
+    location: "Charlotte, NC",
+    bullets: [
+      "Promoted to Trainer ahead of standard tenure; onboarded and trained new hires on beverage standards, POS, and food safety.",
+      "Operated the bar through 200+-transaction morning rushes — while carrying a full CS course load.",
+    ],
+  },
+  {
+    company: "MIT Manipal — Dept. of Computer Science & Engineering",
+    role: "Undergraduate Research Assistant",
+    start: "2024",
+    end: "2025",
+    location: "Manipal, India — advisors: Dr. Nagaraj Naik & Arti Pawar",
+    bullets: [
+      "Assisted research on time-series/statistical ML and on ML for medical imaging — multiclass brain-tumor classification on MRI scans.",
+      "Ran baseline experiments in PyTorch and scikit-learn; supported data collection, preprocessing, and result tabulation for ongoing journal and conference work.",
+    ],
+  },
+  {
+    company: "Manipal Academy of Higher Education",
+    role: "IT Support Assistant",
+    start: "2023-12",
+    end: "2025-05",
+    location: "Manipal, India",
+    bullets: [
+      "Resolved 500+ tier-1/tier-2 helpdesk tickets (Windows/macOS, networking, account access, classroom AV) for students and faculty.",
+      "Authored internal knowledge-base docs that cut average resolution time for repeat issues.",
+    ],
+  },
+];
 
-// ----------------------------------------------------------------------------
-// AWARDS / HONORS / COMPETITIONS
-// ----------------------------------------------------------------------------
-//
-// Example:
-//
-// export const awards: Award[] = [
-//   { name: "ACM ICPC Regional", year: "2024", note: "Top 10 of 200+ teams" },
-//   { name: "HackMIT Best Systems Hack", year: "2023" },
-// ];
-//
-export const awards: Award[] = [];
+export const awards: Award[] = [
+  {
+    name: "Chancellor's List, UNC Charlotte",
+    year: "2026",
+    note: "Spring 2026",
+  },
+  {
+    name: "Dean's List, UNC Charlotte",
+    year: "2025",
+    note: "Fall 2025",
+  },
+  {
+    name: "Smart India Hackathon — 3rd Place (MAHE)",
+    year: "2024",
+    note: "IoT precision-agriculture system: ESP32 sensor nodes, Firebase, ML irrigation recommendations, GSM/SMS alerts for low-connectivity rural areas",
+  },
+  {
+    name: "JEE Advanced 2023 — qualified",
+    year: "2023",
+    note: "Ranked in the top ~1.3% of 1.4M+ candidates (India's national engineering entrance exam)",
+  },
+  {
+    name: "Oracle Cloud Infrastructure (OCI) Foundations",
+    year: "2024",
+    note: "Certification",
+  },
+];
 
 // ----------------------------------------------------------------------------
 // EXTRAS — optional contact / locale bits some recruiters expect
 // ----------------------------------------------------------------------------
 export const extras = {
-  phone: "",          // e.g. "+1 (555) 123-4567" — leave empty to hide
-  location: "",       // e.g. "Bay Area, CA" — leave empty to hide
-  linkedin: "",       // e.g. "linkedin.com/in/parthauti"
-  languages: "",      // e.g. "English (native), Hindi (fluent)"
+  phone: "",          // kept off the public site — it's on the PDF resume
+  location: "Charlotte, NC",
+  linkedin: "linkedin.com/in/parthauti",
+  languages: "English (professional) · Hindi (native) · Marathi (conversational)",
 };

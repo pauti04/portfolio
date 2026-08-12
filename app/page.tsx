@@ -2,6 +2,7 @@ import Link from "next/link";
 import { projects, numbers, skills, social } from "@/lib/data";
 import { POSTS } from "@/lib/writing";
 import { education, experience } from "@/lib/resume";
+import ReflightDemo from "./components/ReflightDemo";
 import BourseDemo from "./components/BourseDemo";
 import NetPulseDemo from "./components/NetPulseDemo";
 import ChainCheckDemo from "./components/ChainCheckDemo";
@@ -19,6 +20,7 @@ import MarginNote from "./components/MarginNote";
 import HeroBento from "./components/HeroBento";
 
 const DEMOS: Record<string, React.ComponentType> = {
+  reflight: ReflightDemo,
   netpulse: NetPulseDemo,
   bourse: BourseDemo,
   costdna: CostDNADemo,
@@ -154,7 +156,7 @@ function Hero() {
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--color-accent)] opacity-70" />
               <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-[var(--color-accent)]" />
             </span>
-            looking for 2026 grad / internship roles
+            graduating dec 2026 · looking for new-grad roles
           </div>
 
           <h1 className="serif text-[2.6rem] md:text-[3.4rem] leading-[1.04] tracking-[-0.022em] text-[var(--color-fg)] mt-6 fade-in d-1 font-semibold lowercase">
@@ -176,9 +178,10 @@ function Hero() {
             ) : (
               <>CS undergrad. </>
             )}
-            mostly Rust and Python — a low-latency matching engine, a BGP
-            hijack detector wired to ris-live, a GNN that thinks it
-            understands my AWS bill.
+            mostly Python and Rust — a flight recorder that makes AI-agent
+            failures replayable, a low-latency matching engine, a BGP hijack
+            detector wired to ris-live, a GNN that thinks it understands my
+            AWS bill.
           </p>
 
           <div className="mt-7 flex flex-wrap items-center gap-3 fade-in d-3">
@@ -230,9 +233,10 @@ function Work() {
     <section id="work" className="pt-20 pb-12 border-t border-[var(--color-line)]">
       <SectionLabel n="01" title="things I've built" />
       <p className="text-[0.98rem] leading-[1.7] text-[var(--color-fg-soft)] max-w-[58ch] mt-5 mb-16">
-        Six projects, each followed by something that actually runs in your
-        browser. the matching engine matches. the BGP detector is connected to
-        ris-live right now. nothing here is a screenshot — poke at it.
+        Seven projects, each followed by something that actually runs in your
+        browser. the flight recorder replays a real failure. the matching
+        engine matches. the BGP detector is connected to ris-live right now.
+        nothing here is a screenshot — poke at it.
       </p>
 
       <div className="space-y-20">
@@ -524,9 +528,9 @@ function Contact() {
         <span className="text-[var(--color-accent)]">let&apos;s talk.</span>
       </h2>
       <p className="text-[1rem] leading-[1.7] text-[var(--color-fg-soft)] mt-5 max-w-[56ch]">
-        I&apos;m looking for new-grad and internship roles for 2026.
-        performance work, ML for infra, LLM tooling — happy to talk about any
-        of it. email&apos;s easiest, but the command palette has a shortcut
+        I graduate in December 2026 and I&apos;m looking for new-grad roles.
+        performance work, ML for infra, agent reliability, LLM tooling —
+        happy to talk about any of it. email&apos;s easiest, but the command palette has a shortcut
         if you&apos;re feeling fancy.
       </p>
       <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -620,6 +624,10 @@ function SectionLabel({ n, title }: { n: string; title: string }) {
 }
 
 const NOTES: Record<string, React.ReactNode[]> = {
+  reflight: [
+    <>Replay serves every LLM and tool response from the recording while your actual agent code re-executes — a changed prompt raises <code>ReplayDivergence</code> instead of silently lying.</>,
+    <>The case study: 15 live scheduling runs passed every tool-level check and all booked the meeting on a Sunday. An LLM judge caught 5/5 or 1/5 depending on prompt wording; one promoted 15-line assertion caught all 15, every time.</>,
+  ],
   netpulse: [
     <>The 500× came from replacing a linear sweep with a longest-prefix-match trie indexed by network bits. Without it, the detector spent more time validating than collecting.</>,
     <>Real RIPE RIS announcements are messy: withdrawals, route flaps, MOAS that aren&apos;t actually hijacks. The verdict ensemble exists because no single signal survives the noise.</>,

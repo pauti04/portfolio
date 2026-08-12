@@ -135,8 +135,8 @@ export default async function HeroBento() {
           Open for{" "}
           <span className="text-[var(--color-accent)]">new-grad SWE</span>{" "}
           and{" "}
-          <span className="text-[var(--color-accent)]">ML-infra</span> roles,
-          starting <span className="font-medium">June 2026</span>.
+          <span className="text-[var(--color-accent)]">ML-infra</span> roles —
+          graduating <span className="font-medium">Dec 2026</span>.
         </div>
         <div className="text-[0.78rem] text-[var(--color-muted)] mt-1.5">
           remote or relocate · interviewing now
